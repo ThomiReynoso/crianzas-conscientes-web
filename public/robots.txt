@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.mailensteinbrenner.com/sitemap.xml
+
+# Disallow specific files that don't need to be indexed
+Disallow: /assets/
+Disallow: /*.json$
+Disallow: /*.js$
+Disallow: /*.css$
+
+# Allow important directories
+Allow: /assets/images/
+Allow: /logo.png
+Allow: /Fondo.jpeg
