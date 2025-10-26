@@ -2,4 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
-/* You can add global styles to this file, and also import other style files */
+/* Global base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply font-sans text-neutral-800 bg-pastel-cream;
+  line-height: 1.6;
+  cursor: auto;
+  padding-top: 10vh; /* Compensate for fixed header */
+}
+
+/* Override pointer cursor for interactive elements only */
+button, 
+a, 
+[role="button"], 
+input[type="submit"], 
+input[type="button"], 
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* Typography classes */
+.text-display {
+  @apply font-display;
+}
+
+/* Button styles */
+.btn-primary {
+  @apply bg-pastel-green hover:bg-pastel-green-dark text-neutral-700 font-medium py-3 px-6 rounded-2xl transition-colors duration-300 inline-block text-center cursor-pointer;
+}
+
+.btn-secondary {
+  @apply border-2 border-pastel-green text-pastel-green-dark hover:bg-pastel-green hover:text-neutral-700 font-medium py-3 px-6 rounded-2xl transition-all duration-300 inline-block text-center cursor-pointer;
+}
+
+/* Section spacing */
+.section {
+  @apply py-8 min-h-[90vh] flex items-center;
+}
+
+.section-sm {
+  @apply py-12 md:py-16;
+}
+
+/* Container */
+.container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Card styles */
+.card {
+  @apply bg-white rounded-3xl shadow-sm border border-pastel-beige-light p-6 md:p-8;
+}
+
+/* Utility classes */
+.text-balance {
+  text-wrap: balance;
+}
