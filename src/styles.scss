@@ -11,7 +11,13 @@ body {
   @apply font-sans text-neutral-800 bg-pastel-cream;
   line-height: 1.6;
   cursor: auto;
-  padding-top: 10vh; /* Compensate for fixed header */
+}
+
+/* Compensate for fixed header only on desktop */
+@media (min-width: 768px) {
+  body {
+    padding-top: 10vh;
+  }
 }
 
 /* Override pointer cursor for interactive elements only */
@@ -40,7 +46,15 @@ input[type="button"],
 
 /* Section spacing */
 .section {
-  @apply py-8 min-h-[90vh] flex items-center;
+  @apply py-8 flex items-center;
+  min-height: 100vh; /* Full height on mobile */
+}
+
+/* Desktop section height */
+@media (min-width: 768px) {
+  .section {
+    min-height: 90vh;
+  }
 }
 
 .section-sm {
