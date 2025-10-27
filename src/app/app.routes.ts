@@ -22,6 +22,10 @@ export const routes: Routes = [
     loadComponent: () => import('./features/contact/contact').then(m => m.Contact)
   },
   {
+    path: 'descarga-guia',
+    loadComponent: () => import('./features/download-guide/download-guide').then(m => m.DownloadGuideComponent)
+  },
+  {
     path: '**',
     redirectTo: ''
   }
