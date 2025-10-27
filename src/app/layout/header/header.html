@@ -3,8 +3,8 @@
     <div class="flex justify-between items-center h-[10vh]">
       <!-- Logo -->
       <div class="flex-shrink-0">
-        <a routerLink="/" class="text-2xl font-display font-semibold text-neutral-600">
-          Crianzas Conscientes
+        <a routerLink="/" class="flex items-center">
+          <img src="/logo.png" alt="Crianzas Conscientes" class="h-12 w-auto">
         </a>
       </div>
 
@@ -12,44 +12,43 @@
       <div class="hidden md:block">
         <div class="ml-10 flex items-baseline space-x-8">
           <a routerLink="/" 
-             routerLinkActive="text-pastel-green-dark font-medium" 
+             routerLinkActive="text-pastel-green font-medium" 
              [routerLinkActiveOptions]="{exact: true}"
-             class="text-neutral-700 hover:text-pastel-green-dark px-3 py-2 rounded-2xl text-sm font-medium transition-colors">
+             class="text-neutral-600 hover:text-pastel-green px-3 py-2 rounded-2xl text-md font-medium transition-colors">
             Inicio
           </a>
           <a routerLink="/quien-soy" 
-             routerLinkActive="text-pastel-green-dark font-medium"
-             class="text-neutral-700 hover:text-pastel-green-dark px-3 py-2 rounded-2xl text-sm font-medium transition-colors">
+             routerLinkActive="text-pastel-green font-medium"
+             class="text-neutral-600 hover:text-pastel-green px-3 py-2 rounded-2xl text-md font-medium transition-colors">
             Quién Soy
           </a>
           <a routerLink="/que-es-crianza-consciente" 
-             routerLinkActive="text-pastel-green-dark font-medium"
-             class="text-neutral-700 hover:text-pastel-green-dark px-3 py-2 rounded-2xl text-sm font-medium transition-colors">
+             routerLinkActive="text-pastel-green font-medium"
+             class="text-neutral-600 hover:text-pastel-green px-3 py-2 rounded-2xl text-md font-medium transition-colors">
              Qué es la Crianza Consciente
           </a>
           <a routerLink="/servicios" 
-             routerLinkActive="text-pastel-green-dark font-medium"
-             class="text-neutral-700 hover:text-pastel-green-dark px-3 py-2 rounded-2xl text-sm font-medium transition-colors">
+             routerLinkActive="text-pastel-green font-medium"
+             class="text-neutral-600 hover:text-pastel-green px-3 py-2 rounded-2xl text-md font-medium transition-colors">
             Servicios
           </a>
           <a routerLink="/contacto" 
-             routerLinkActive="text-pastel-green-dark font-medium"
-             class="text-neutral-700 hover:text-pastel-green-dark px-3 py-2 rounded-2xl text-sm font-medium transition-colors">
+             routerLinkActive="text-pastel-green font-medium"
+             class="text-neutral-600 hover:text-pastel-green px-3 py-2 rounded-2xl text-md font-medium transition-colors">
             Contacto
           </a>
         </div>
       </div>
 
       <!-- CTA Button -->
-      <div class="hidden md:block">
-        <button class="bg-pastel-green hover:bg-pastel-green-dark text-neutral-800 font-medium py-2 px-6 rounded-2xl text-sm transition-colors">
+        <button class="btn-primary">
           Descarga la guía gratuita
         </button>
-      </div>
+
 
       <!-- Mobile menu button -->
       <div class="md:hidden">
-        <button (click)="toggleMenu()" class="text-neutral-700 hover:text-pastel-green-dark p-2">
+        <button (click)="toggleMenu()" class="text-neutral-700 hover:text-pastel-green p-2">
           <svg class="h-6 w-6" [class.hidden]="isMenuOpen()" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
@@ -64,34 +63,34 @@
     <div class="md:hidden" [class.hidden]="!isMenuOpen()">
       <div class="px-2 pt-2 pb-3 space-y-1 border-t border-pastel-beige-light mt-2">
         <a routerLink="/" 
-           routerLinkActive="bg-pastel-beige-light text-pastel-green-dark" 
+           routerLinkActive="bg-pastel-beige-light text-pastel-green" 
            [routerLinkActiveOptions]="{exact: true}"
            (click)="closeMenu()"
-           class="text-neutral-700 hover:bg-pastel-beige-light hover:text-pastel-green-dark block px-3 py-2 rounded-2xl text-base font-medium">
+           class="text-neutral-700 hover:bg-pastel-beige-light hover:text-pastel-green block px-3 py-2 rounded-2xl text-base font-medium">
           Inicio
         </a>
         <a routerLink="/quien-soy" 
-           routerLinkActive="bg-pastel-beige-light text-pastel-green-dark"
+           routerLinkActive="bg-pastel-beige-light text-pastel-green"
            (click)="closeMenu()"
-           class="text-neutral-700 hover:bg-pastel-beige-light hover:text-pastel-green-dark block px-3 py-2 rounded-2xl text-base font-medium">
+           class="text-neutral-700 hover:bg-pastel-beige-light hover:text-pastel-green block px-3 py-2 rounded-2xl text-base font-medium">
           Quién Soy
         </a>
         <a routerLink="/que-es-crianza-consciente" 
-           routerLinkActive="bg-pastel-beige-light text-pastel-green-dark"
+           routerLinkActive="bg-pastel-beige-light text-pastel-green"
            (click)="closeMenu()"
-           class="text-neutral-700 hover:bg-pastel-beige-light hover:text-pastel-green-dark block px-3 py-2 rounded-2xl text-base font-medium">
+           class="text-neutral-700 hover:bg-pastel-beige-light hover:text-pastel-green block px-3 py-2 rounded-2xl text-base font-medium">
           Qué es la Crianza Consciente
         </a>
         <a routerLink="/servicios" 
-           routerLinkActive="bg-pastel-beige-light text-pastel-green-dark"
+           routerLinkActive="bg-pastel-beige-light text-pastel-green"
            (click)="closeMenu()"
-           class="text-neutral-700 hover:bg-pastel-beige-light hover:text-pastel-green-dark block px-3 py-2 rounded-2xl text-base font-medium">
+           class="text-neutral-700 hover:bg-pastel-beige-light hover:text-pastel-green block px-3 py-2 rounded-2xl text-base font-medium">
           Servicios
         </a>
         <a routerLink="/contacto" 
-           routerLinkActive="bg-pastel-beige-light text-pastel-green-dark"
+           routerLinkActive="bg-pastel-beige-light text-pastel-green"
            (click)="closeMenu()"
-           class="text-neutral-700 hover:bg-pastel-beige-light hover:text-pastel-green-dark block px-3 py-2 rounded-2xl text-base font-medium">
+           class="text-neutral-700 hover:bg-pastel-beige-light hover:text-pastel-green block px-3 py-2 rounded-2xl text-base font-medium">
           Contacto
         </a>
         <div class="pt-4">

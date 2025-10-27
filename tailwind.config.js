@@ -8,9 +8,9 @@ module.exports = {
       colors: {
         pastel: {
           green: {
-            light: '#678a21',
+            light: '#a8c66c',
             DEFAULT: '#678a21',
-            dark: '#678a21',
+            dark: '#4d6619',
           },
           beige: {
             light: '#F5F5DC',
