@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { environment } from '../../../environments/environment';
 
@@ -13,19 +14,35 @@ export interface GuideDownload {
   providedIn: 'root'
 })
 export class SupabaseService {
-  private supabase: SupabaseClient;
+  private supabase: SupabaseClient | null = null;
+  private platformId = inject(PLATFORM_ID);
 
   constructor() {
-    this.supabase = createClient(
-      environment.supabase.url,
-      environment.supabase.anonKey
-    );
+    // Solo inicializar Supabase en el navegador, no en el servidor
+    if (isPlatformBrowser(this.platformId)) {
+      this.supabase = createClient(
+        environment.supabase.url,
+        environment.supabase.anonKey,
+        {
+          auth: {
+            persistSession: false, // No persistir sesión (no necesitamos auth)
+            autoRefreshToken: false, // No auto-refrescar tokens
+            detectSessionInUrl: false // No detectar sesión en URL
+          }
+        }
+      );
+    }
   }
 
   /**
    * Guarda un email en la tabla guide_downloads
    */
   async saveGuideDownload(email: string, sourcePage: string = 'descarga-guia'): Promise<{ success: boolean; error?: string }> {
+    if (!this.supabase) {
+      console.error('Supabase no está disponible (ejecutando en servidor)');
+      return { success: false, error: 'Servicio no disponible en el servidor' };
+    }
+
     try {
       const { data, error } = await this.supabase
         .from('guide_downloads')
@@ -54,6 +71,11 @@ export class SupabaseService {
    * Obtiene todos los registros de guide_downloads (requiere autenticación)
    */
   async getAllGuideDownloads(): Promise<GuideDownload[]> {
+    if (!this.supabase) {
+      console.error('Supabase no está disponible (ejecutando en servidor)');
+      return [];
+    }
+
     try {
       const { data, error } = await this.supabase
         .from('guide_downloads')
@@ -76,6 +98,11 @@ export class SupabaseService {
    * Verifica si un email ya está registrado
    */
   async checkEmailExists(email: string): Promise<boolean> {
+    if (!this.supabase) {
+      console.error('Supabase no está disponible (ejecutando en servidor)');
+      return false;
+    }
+
     try {
       const { data, error } = await this.supabase
         .from('guide_downloads')
