@@ -21,6 +21,15 @@ export class Contact {
   isSuccess = signal(false);
   errorMessage = signal('');
 
+  // Subject options
+  subjectOptions = [
+    { value: '', label: 'Selecciona un asunto' },
+    { value: 'session', label: 'Consulta sobre sesiones personalizadas' },
+    { value: 'ebook', label: 'Pregunta sobre el ebook' },
+    { value: 'collaboration', label: 'Propuesta de colaboración' },
+    { value: 'other', label: 'Otro motivo / solo quiero charlar 🌿' }
+  ];
+
   private validateEmail(email: string): boolean {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);

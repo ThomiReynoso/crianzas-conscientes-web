@@ -92,41 +92,63 @@ Deno.serve(async (req) => {
             type: 'text/html',
             value: `
               <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-                <h1 style="color: #4A5568; text-align: center;">¡Gracias por tu interés! 💚</h1>
-
-                <p style="color: #4A5568; font-size: 16px; line-height: 1.6;">
-                  Hola,
+                <p style="color: #4A5568; font-size: 16px; line-height: 1.8;">
+                  Hola 💚
                 </p>
 
-                <p style="color: #4A5568; font-size: 16px; line-height: 1.6;">
-                  Me alegra mucho que hayas decidido comenzar este camino hacia una crianza más consciente y conectada.
+                <p style="color: #4A5568; font-size: 16px; line-height: 1.8;">
+                  Me alegra mucho que quieras seguir aprendiendo sobre cómo acompañar desde un lugar más consciente.
+                  Este ebook nació de un proceso personal, de observar mis propias emociones y entender cómo lo que vivimos en nuestra infancia sigue influyendo en la forma en que acompañamos hoy.
                 </p>
 
-                <p style="color: #4A5568; font-size: 16px; line-height: 1.6;">
-                  Adjunto encontrarás la <strong>Guía de Primeros Pasos en Crianza Consciente</strong> con herramientas prácticas que podrás empezar a aplicar hoy mismo.
+                <p style="color: #4A5568; font-size: 16px; line-height: 1.8;">
+                  A lo largo de sus páginas vas a encontrar reflexiones, herramientas y ejercicios para transformar reacciones automáticas en respuestas más conscientes.
+                  Te invita a cuestionarte, mirar hacia adentro y entender tus propias emociones, para poder acompañar a lxs niñxs desde la calma, sin gritos ni culpas.
                 </p>
 
-                <div style="background-color: #F7FAFC; border-left: 4px solid #B8E6D5; padding: 15px; margin: 20px 0;">
-                  <p style="color: #4A5568; margin: 0;">
-                    💡 <strong>Tip:</strong> Te recomiendo que empieces por el ejercicio de autoconocimiento de la página 3.
-                    Recuerda: los adultos primero debemos mirarnos para criar diferente.
+                <p style="color: #4A5568; font-size: 16px; line-height: 1.8;">
+                  No es una guía perfecta, ni pretende darte todas las respuestas.
+                  Es un espacio para pensar, sentir y recordar que también los adultxs seguimos aprendiendo. 🌱
+                </p>
+
+                <div style="background-color: #B8E6D5; border-radius: 8px; padding: 20px; margin: 30px 0; text-align: center;">
+                  <p style="color: #4A5568; font-size: 18px; font-weight: bold; margin: 0 0 10px 0;">
+                    👉 El ebook está adjunto en este email
+                  </p>
+                  <p style="color: #4A5568; font-size: 14px; margin: 0;">
+                    Descarga el archivo PDF "Guia-Crianza-Consciente.pdf"
                   </p>
                 </div>
 
-                <p style="color: #4A5568; font-size: 16px; line-height: 1.6;">
-                  Si tienes alguna pregunta o quieres conocer más sobre las sesiones de acompañamiento, no dudes en responder este email.
+                <p style="color: #4A5568; font-size: 16px; line-height: 1.8;">
+                  Si al leerlo algo te resuena, te hace repensar tu historia o simplemente te da alivio, ya cumplió su propósito.
                 </p>
 
-                <p style="color: #4A5568; font-size: 16px; line-height: 1.6;">
+                <p style="color: #4A5568; font-size: 16px; line-height: 1.8;">
+                  Y si querés seguir profundizando o conversar sobre lo que estás viviendo, solo contame el motivo, y te estaré contactando pronto.
+                </p>
+
+                <div style="text-align: center; margin: 30px 0;">
+                  <a href="https://www.mailensteinbrenner.com/contacto" style="background-color: #B8E6D5; color: #4A5568; padding: 15px 30px; text-decoration: none; border-radius: 25px; font-weight: bold; display: inline-block;">
+                    💬 Enviame tu mensajito
+                  </a>
+                </div>
+
+                <p style="color: #4A5568; font-size: 16px; line-height: 1.8;">
+                  Gracias por estar del otro lado, por animarte a mirar distinto
+                  y por elegir construir vínculos más sanos y presentes.
+                </p>
+
+                <p style="color: #4A5568; font-size: 16px; line-height: 1.8;">
                   Con cariño,<br>
-                  <strong>Mailen</strong><br>
+                  <strong>Mailen</strong> 💜<br>
                   Crianzas Conscientes
                 </p>
 
                 <hr style="border: none; border-top: 1px solid #E2E8F0; margin: 30px 0;">
 
                 <p style="color: #718096; font-size: 14px; text-align: center;">
-                  ¿Quieres más contenido? Sígueme en Instagram
+                  ¿Quieres más contenido? Sígueme en Instagram <a href="https://instagram.com/mailensteinbrenner" style="color: #B8E6D5; text-decoration: none; font-weight: bold;">@mailensteinbrenner</a>
                 </p>
               </div>
             `
