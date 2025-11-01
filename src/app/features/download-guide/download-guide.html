@@ -1,0 +1,142 @@
+<!-- Hero Section with Form -->
+<section class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-pastel-beige-light via-pastel-cream to-pastel-green-light py-20">
+  <div class="container max-w-4xl">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <!-- Left Column - Information -->
+      <div class="space-y-6">
+        <div class="space-y-4">
+          <h1 class="text-4xl md:text-5xl font-display font-bold text-neutral-800 leading-tight">
+            Guía Gratuita 🌱
+            <span class="block text-pastel-green">“Límites con amor”</span>
+          </h1>
+          <p class="text-xl text-neutral-600">
+            Primeros pasos hacia una crianza más consciente y conectada
+          </p>
+        </div>
+
+        <!-- Benefits List -->
+        <div class="space-y-4 pt-6">
+          <h3 class="text-lg font-display font-semibold text-neutral-800">
+            En esta guía vas a encontrar
+          </h3>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <div class="w-6 h-6 bg-pastel-green rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                <svg class="w-4 h-4 text-neutral-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <span class="text-neutral-700">Herramientas simples para poner límites desde el amor y la calma.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-6 h-6 bg-pastel-green rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                <svg class="w-4 h-4 text-neutral-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <span class="text-neutral-700">Ejercicios para reconectar con vos y sanar lo que tu infancia dejó pendiente.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-6 h-6 bg-pastel-green rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                <svg class="w-4 h-4 text-neutral-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <span class="text-neutral-700">Estrategias prácticas para acompañar sin culpa ni gritos.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-6 h-6 bg-pastel-green rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                <svg class="w-4 h-4 text-neutral-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <span class="text-neutral-700">Reflexiones para construir vínculos más sanos, empáticos y reales.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Right Column - Form -->
+      <div class="lg:pl-8">
+        @if (!isSuccess()) {
+          <div class="card bg-white shadow-lg">
+            <h2 class="text-2xl font-display font-semibold text-neutral-800 mb-6">
+              Recibí tu guía al instante
+            </h2>
+
+            <form (ngSubmit)="onSubmit()" class="space-y-6">
+              <div>
+                <label for="email" class="block text-sm font-medium text-neutral-700 mb-2">
+                  Correo electrónico
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  [(ngModel)]="email"
+                  required
+                  placeholder="tu@email.com"
+                  class="w-full px-4 py-3 border border-pastel-beige-light rounded-2xl focus:outline-none focus:ring-2 focus:ring-pastel-green focus:border-transparent transition-all"
+                  [disabled]="isSubmitting()"
+                />
+              </div>
+
+              @if (errorMessage()) {
+                <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-2xl">
+                  <p class="text-sm">{{ errorMessage() }}</p>
+                </div>
+              }
+
+              <button
+                type="submit"
+                [disabled]="isSubmitting() || !email() || !isValidEmail(email())"
+                class="w-full btn-primary py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                @if (isSubmitting()) {
+                  <span class="flex items-center justify-center gap-2">
+                    <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Enviando...
+                  </span>
+                } @else {
+                  Obtener Guía Gratuita
+                }
+              </button>
+
+              <p class="text-sm text-neutral-600 text-center">
+                👉 Sin spam, sin teorías imposibles. Solo herramientas reales para acompañar con más calma y conciencia.
+              </p>
+            </form>
+          </div>
+        } @else {
+          <!-- Success Message -->
+          <div class="card bg-white shadow-lg text-center">
+            <div class="w-16 h-16 bg-pastel-green rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-neutral-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+
+            <h2 class="text-2xl font-display font-semibold text-neutral-800 mb-4">
+              ¡Gracias por tu interés!
+            </h2>
+
+            <p class="text-lg text-neutral-700 mb-6">
+              Hemos recibido tu solicitud. Pronto recibirás la guía en tu correo electrónico.
+            </p>
+
+            <p class="text-neutral-600 mb-8">
+              Revisa tu bandeja de entrada (y spam, por si acaso).
+            </p>
+
+            <a routerLink="/" class="btn-secondary inline-block">
+              Volver al inicio
+            </a>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

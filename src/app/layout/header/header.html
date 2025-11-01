@@ -42,9 +42,9 @@
 
       <!-- CTA Button -->
       <div class="hidden md:block">
-          <button class="btn-primary">
+          <a routerLink="/descarga-guia" class="btn-primary">
             Descarga la guía gratuita
-          </button>
+          </a>
       </div>
 
 
@@ -96,9 +96,9 @@
           Contacto
         </a>
         <div class="pt-4">
-          <button class="w-full bg-pastel-green hover:bg-pastel-green-dark text-neutral-800 font-medium py-2 px-4 rounded-2xl text-sm transition-colors">
+          <a routerLink="/descarga-guia" (click)="closeMenu()" class="block w-full bg-pastel-green hover:bg-pastel-green-dark text-neutral-800 font-medium py-2 px-4 rounded-2xl text-sm transition-colors text-center">
             Descarga la guía gratuita
-          </button>
+          </a>
         </div>
       </div>
     </div>

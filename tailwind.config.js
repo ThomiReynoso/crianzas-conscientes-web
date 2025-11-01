@@ -9,8 +9,8 @@ module.exports = {
         pastel: {
           green: {
             light: '#a8c66c',
-            DEFAULT: '#678a21',
-            dark: '#4d6619',
+            DEFAULT: '#539f4a',
+            dark: '#439639',
           },
           beige: {
             light: '#F5F5DC',
