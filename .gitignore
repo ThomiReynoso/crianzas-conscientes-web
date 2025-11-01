@@ -42,6 +42,7 @@ __screenshots__/
 .DS_Store
 Thumbs.db
 
-# Environment files with credentials
+# Environment files with credentials (local only)
 /src/environments/environment.ts
 /src/environments/environment.development.ts
+# environment.prod.ts se commitea porque usa credenciales públicas de Supabase
