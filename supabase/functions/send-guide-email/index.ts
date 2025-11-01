@@ -35,7 +35,7 @@ Deno.serve(async (req) => {
     }
 
     // URL del PDF en Supabase Storage
-    const pdfUrl = `${SUPABASE_URL}/storage/v1/object/public/guide-pdfs/guia-crianza-consciente.pdf`
+    const pdfUrl = `${SUPABASE_URL}/storage/v1/object/public/guide-pdfs/Limites-con-amor-como-acompanar-sin-culpa-ni-gritos.pdf`
     console.log('URL del PDF:', pdfUrl)
 
     // Descargar el PDF para adjuntarlo
@@ -80,11 +80,11 @@ Deno.serve(async (req) => {
           }
         ],
         from: {
-          email: 'mailensteinbrenner@gmail.com',
+          email: 'hola@mailensteinbrenner.com',
           name: 'Crianzas Conscientes'
         },
         reply_to: {
-          email: 'mailensteinbrenner@gmail.com',
+          email: 'hola@mailensteinbrenner.com',
           name: 'Mailen'
         },
         content: [
@@ -116,7 +116,7 @@ Deno.serve(async (req) => {
                     👉 El ebook está adjunto en este email
                   </p>
                   <p style="color: #4A5568; font-size: 14px; margin: 0;">
-                    Descarga el archivo PDF "Guia-Crianza-Consciente.pdf"
+                    Descarga el archivo PDF "Límites con amor: cómo acompañar sin culpa ni gritos"
                   </p>
                 </div>
 
@@ -157,7 +157,7 @@ Deno.serve(async (req) => {
         attachments: [
           {
             content: pdfBase64,
-            filename: 'Guia-Crianza-Consciente.pdf',
+            filename: 'Limites-con-amor-como-acompanar-sin-culpa-ni-gritos.pdf',
             type: 'application/pdf',
             disposition: 'attachment'
           }
