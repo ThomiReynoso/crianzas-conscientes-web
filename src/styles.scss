@@ -37,7 +37,7 @@ input[type="button"],
 
 /* Button styles */
 .btn-primary {
-  @apply bg-pastel-green hover:bg-pastel-beige border-2 border-transparent hover:border-pastel-green text-neutral-900 font-medium py-3 px-6 rounded-2xl transition-colors duration-300 inline-block text-center cursor-pointer;
+  @apply bg-pastel-green hover:bg-pastel-beige border-2 border-transparent hover:border-pastel-green text-neutral-700 font-medium py-3 px-6 rounded-2xl transition-colors duration-300 inline-block text-center cursor-pointer;
 }
 
 .btn-secondary {
