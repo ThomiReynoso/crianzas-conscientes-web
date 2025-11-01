@@ -63,9 +63,9 @@
           <form class="space-y-4" (ngSubmit)="onSubmit($event)">
             <!-- Success Message -->
             @if (isSuccess()) {
-              <div class="bg-pastel-green rounded-2xl p-3 border border-pastel-green">
+              <div class="bg-pastel-green-light rounded-2xl p-3 border border-pastel-green">
                 <p class="text-neutral-800 font-medium text-sm">
-                  ¡Mensaje enviado con éxito! Te responderé en un plazo máximo de 48 horas.
+                  ¡Mensaje enviado con éxito! Te responderé lo antes posible 💚
                 </p>
               </div>
             }
@@ -89,7 +89,7 @@
                 required
                 [(ngModel)]="name"
                 [disabled]="isSubmitting()"
-                class="w-full px-3 py-2.5 text-sm border border-pastel-beige-light rounded-2xl focus:ring-2 focus:ring-pastel-green focus:border-transparent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                class="w-full px-3 py-2.5 text-sm border border-pastel-green-light rounded-2xl focus:ring-2 focus:ring-pastel-green focus:border-transparent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 placeholder="Tu nombre completo"
               />
             </div>
@@ -106,7 +106,7 @@
                 required
                 [(ngModel)]="email"
                 [disabled]="isSubmitting()"
-                class="w-full px-3 py-2.5 text-sm border border-pastel-beige-light rounded-2xl focus:ring-2 focus:ring-pastel-green focus:border-transparent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                class="w-full px-3 py-2.5 text-sm border border-pastel-green-light rounded-2xl focus:ring-2 focus:ring-pastel-green focus:border-transparent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 placeholder="tu@email.com"
               />
             </div>
@@ -123,7 +123,7 @@
                   required
                   [(ngModel)]="subject"
                   [disabled]="isSubmitting()"
-                  class="w-full px-3 py-2.5 pr-10 text-sm border border-pastel-beige-light rounded-2xl focus:ring-2 focus:ring-pastel-green focus:border-transparent transition-all appearance-none bg-white cursor-pointer hover:border-pastel-green disabled:opacity-50 disabled:cursor-not-allowed"
+                  class="w-full px-3 py-2.5 pr-10 text-sm border border-pastel-green-light rounded-2xl focus:ring-2 focus:ring-pastel-green focus:border-transparent transition-all appearance-none bg-white cursor-pointer hover:border-pastel-green disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   @for (option of subjectOptions; track option.value) {
                     <option [value]="option.value">{{ option.label }}</option>
@@ -150,7 +150,7 @@
                 required
                 [(ngModel)]="message"
                 [disabled]="isSubmitting()"
-                class="w-full px-3 py-2.5 text-sm border border-pastel-beige-light rounded-2xl focus:ring-2 focus:ring-pastel-green focus:border-transparent transition-colors resize-none disabled:opacity-50 disabled:cursor-not-allowed"
+                class="w-full px-3 py-2.5 text-sm border border-pastel-green-light rounded-2xl focus:ring-2 focus:ring-pastel-green focus:border-transparent transition-colors resize-none disabled:opacity-50 disabled:cursor-not-allowed"
                 placeholder="Cuéntame qué te trae por aquí..."
               ></textarea>
             </div>
