@@ -80,7 +80,7 @@ Deno.serve(async (req) => {
           }
         ],
         from: {
-          email: 'hola@mailensteinbrenner.com',
+          email: 'mailensteinbrenner@gmail.com',
           name: 'Crianzas Conscientes'
         },
         reply_to: {

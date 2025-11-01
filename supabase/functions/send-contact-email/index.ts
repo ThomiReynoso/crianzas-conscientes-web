@@ -70,8 +70,8 @@ Deno.serve(async (req) => {
           }
         ],
         from: {
-          email: 'hola@mailensteinbrenner.com',
-          name: 'Formulario de Contacto'
+          email: 'mailensteinbrenner@gmail.com',
+          name: 'Formulario Web - Crianzas Conscientes'
         },
         reply_to: {
           email: email,
