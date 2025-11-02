@@ -81,9 +81,9 @@
                 <div class="text-4xl font-bold text-pastel-green-dark">5 €</div>
               </div>
             </div>
-            <button class="btn-primary w-full text-lg py-4">
+            <a [routerLink]="['/contacto']" [queryParams]="{subject: 'ebook-paid', message: 'Estoy interesadx en comprar el ebook'}" class="btn-primary w-full text-lg py-4 block text-center">
               Comprar ahora
-            </button>
+            </a>
             <p class="text-sm text-neutral-500 text-center mt-3">
               Pago seguro. Descarga inmediata.
             </p>
@@ -228,9 +228,9 @@
           <p class="text-neutral-600 mb-6">
             Invierte en ti y en tu familia. Este ebook es el primer paso hacia una crianza más consciente y conectada.
           </p>
-          <button class="btn-primary text-lg px-12 py-4">
+          <a [routerLink]="['/contacto']" [queryParams]="{subject: 'ebook-paid', message: 'Estoy interesadx en comprar el ebook'}" class="btn-primary text-lg px-12 py-4 inline-block">
             Comprar ebook por 5 €
-          </button>
+          </a>
         </div>
       </div>
     </div>
@@ -253,7 +253,7 @@
             ¿Cómo recibo el ebook después de comprarlo?
           </h3>
           <p class="text-neutral-600">
-            Inmediatamente después de completar tu compra, recibirás un email con el enlace de descarga del PDF. El acceso es instantáneo.
+            Enviame por el formulario de Contacto que estás interesadx, coordinamos el pago por Bizum o Transferencia Bancaria, y te envío un email con el PDF adjunto.
           </p>
         </div>
 
