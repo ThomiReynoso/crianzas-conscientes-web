@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, signal, OnInit } from '@angular/core';
+import { RouterLink, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../../../environments/environment';
+import { CONTACT_SUBJECT_OPTIONS } from '../../shared/constants/contact-subjects';
 
 @Component({
   selector: 'app-contact',
@@ -9,7 +10,7 @@ import { environment } from '../../../environments/environment';
   templateUrl: './contact.html',
   styleUrl: './contact.scss',
 })
-export class Contact {
+export class Contact implements OnInit {
   // Form fields
   name = signal('');
   email = signal('');
@@ -21,14 +22,22 @@ export class Contact {
   isSuccess = signal(false);
   errorMessage = signal('');
 
-  // Subject options
-  subjectOptions = [
-    { value: '', label: 'Selecciona un asunto' },
-    { value: 'session', label: 'Consulta sobre sesiones personalizadas' },
-    { value: 'ebook', label: 'Pregunta sobre el ebook' },
-    { value: 'collaboration', label: 'Propuesta de colaboración' },
-    { value: 'other', label: 'Otro motivo / solo quiero charlar 🌿' }
-  ];
+  // Subject options (importadas desde constantes compartidas)
+  subjectOptions = CONTACT_SUBJECT_OPTIONS;
+
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    // Check for query params
+    this.route.queryParams.subscribe(params => {
+      if (params['subject']) {
+        this.subject.set(params['subject']);
+      }
+      if (params['message']) {
+        this.message.set(params['message']);
+      }
+    });
+  }
 
   private validateEmail(email: string): boolean {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;

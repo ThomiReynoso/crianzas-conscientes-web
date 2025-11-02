@@ -195,7 +195,8 @@
         Si sientes que este enfoque conecta contigo, me encantaría acompañarte en tu camino hacia una crianza más consciente.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <button class="btn-primary text-lg px-8 py-4">
+        <button [routerLink]="['/contacto']"
+        [queryParams]="{subject: 'session', message: 'Hola! Me gustaría agendar mi primera sesión gratuita de 30 minutos para conocernos y hablar sobre mi situación.'}" class="btn-primary text-lg px-8 py-4">
           Agenda una sesión conmigo
         </button>
         <a routerLink="/servicios" class="btn-secondary text-lg px-8 py-4">
