@@ -26,6 +26,10 @@ export const routes: Routes = [
     loadComponent: () => import('./features/download-guide/download-guide').then(m => m.DownloadGuideComponent)
   },
   {
+    path: 'recursos-digitales',
+    loadComponent: () => import('./features/recursos-digitales/recursos-digitales').then(m => m.RecursosDigitalesComponent)
+  },
+  {
     path: '**',
     redirectTo: ''
   }

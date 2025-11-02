@@ -9,47 +9,52 @@
       </div>
 
       <!-- Desktop Navigation -->
-      <div class="hidden md:block">
-        <div class="ml-10 flex items-baseline space-x-8">
-          <a routerLink="/" 
-             routerLinkActive="text-pastel-green font-medium" 
+      <div class="hidden lg:block">
+        <div class="ml-10 flex items-baseline space-x-4 xl:space-x-6">
+          <a routerLink="/"
+             routerLinkActive="text-pastel-green font-medium"
              [routerLinkActiveOptions]="{exact: true}"
-             class="text-neutral-600 hover:text-pastel-green px-3 py-2 rounded-2xl text-md font-medium transition-colors">
+             class="text-neutral-600 hover:text-pastel-green px-2 py-2 rounded-2xl text-md font-medium transition-colors whitespace-nowrap">
             Inicio
           </a>
-          <a routerLink="/quien-soy" 
+          <a routerLink="/quien-soy"
              routerLinkActive="text-pastel-green font-medium"
-             class="text-neutral-600 hover:text-pastel-green px-3 py-2 rounded-2xl text-md font-medium transition-colors">
+             class="text-neutral-600 hover:text-pastel-green px-2 py-2 rounded-2xl text-md font-medium transition-colors whitespace-nowrap">
             Quién Soy
           </a>
-          <a routerLink="/que-es-crianza-consciente" 
+          <a routerLink="/que-es-crianza-consciente"
              routerLinkActive="text-pastel-green font-medium"
-             class="text-neutral-600 hover:text-pastel-green px-3 py-2 rounded-2xl text-md font-medium transition-colors">
-             Qué es la Crianza Consciente
+             class="text-neutral-600 hover:text-pastel-green px-2 py-2 rounded-2xl text-md font-medium transition-colors whitespace-nowrap">
+            Qué es Crianzas Conscientes
           </a>
-          <a routerLink="/servicios" 
+          <a routerLink="/servicios"
              routerLinkActive="text-pastel-green font-medium"
-             class="text-neutral-600 hover:text-pastel-green px-3 py-2 rounded-2xl text-md font-medium transition-colors">
+             class="text-neutral-600 hover:text-pastel-green px-2 py-2 rounded-2xl text-md font-medium transition-colors whitespace-nowrap">
             Servicios
           </a>
-          <a routerLink="/contacto" 
+          <a routerLink="/recursos-digitales"
              routerLinkActive="text-pastel-green font-medium"
-             class="text-neutral-600 hover:text-pastel-green px-3 py-2 rounded-2xl text-md font-medium transition-colors">
+             class="text-neutral-600 hover:text-pastel-green px-2 py-2 rounded-2xl text-md font-medium transition-colors whitespace-nowrap">
+            Recursos
+          </a>
+          <a routerLink="/contacto"
+             routerLinkActive="text-pastel-green font-medium"
+             class="text-neutral-600 hover:text-pastel-green px-2 py-2 rounded-2xl text-md font-medium transition-colors whitespace-nowrap">
             Contacto
           </a>
         </div>
       </div>
 
       <!-- CTA Button -->
-      <div class="hidden md:block">
-          <a routerLink="/descarga-guia" class="btn-primary">
-            Descarga la guía gratuita
+      <div class="hidden lg:block">
+          <a routerLink="/descarga-guia" class="btn-primary text-md px-4 py-2">
+            Descarga la guía
           </a>
       </div>
 
 
       <!-- Mobile menu button -->
-      <div class="md:hidden">
+      <div class="lg:hidden">
         <button (click)="toggleMenu()" class="text-neutral-700 hover:text-pastel-green p-2">
           <svg class="h-6 w-6" [class.hidden]="isMenuOpen()" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -62,7 +67,7 @@
     </div>
 
     <!-- Mobile Navigation -->
-    <div class="md:hidden" [class.hidden]="!isMenuOpen()">
+    <div class="lg:hidden" [class.hidden]="!isMenuOpen()">
       <div class="px-2 pt-2 pb-3 space-y-1 border-t border-pastel-beige-light mt-2">
         <a routerLink="/" 
            routerLinkActive="bg-pastel-beige-light text-pastel-green" 
@@ -83,20 +88,26 @@
            class="text-neutral-700 hover:bg-pastel-beige-light hover:text-pastel-green block px-3 py-2 rounded-2xl text-base font-medium">
           Qué es la Crianza Consciente
         </a>
-        <a routerLink="/servicios" 
+        <a routerLink="/servicios"
            routerLinkActive="bg-pastel-beige-light text-pastel-green"
            (click)="closeMenu()"
            class="text-neutral-700 hover:bg-pastel-beige-light hover:text-pastel-green block px-3 py-2 rounded-2xl text-base font-medium">
           Servicios
         </a>
-        <a routerLink="/contacto" 
+        <a routerLink="/recursos-digitales"
+           routerLinkActive="bg-pastel-beige-light text-pastel-green"
+           (click)="closeMenu()"
+           class="text-neutral-700 hover:bg-pastel-beige-light hover:text-pastel-green block px-3 py-2 rounded-2xl text-base font-medium">
+          Recursos Digitales
+        </a>
+        <a routerLink="/contacto"
            routerLinkActive="bg-pastel-beige-light text-pastel-green"
            (click)="closeMenu()"
            class="text-neutral-700 hover:bg-pastel-beige-light hover:text-pastel-green block px-3 py-2 rounded-2xl text-base font-medium">
           Contacto
         </a>
         <div class="pt-4">
-          <a routerLink="/descarga-guia" (click)="closeMenu()" class="block w-full bg-pastel-green hover:bg-pastel-green-dark text-neutral-800 font-medium py-2 px-4 rounded-2xl text-sm transition-colors text-center">
+          <a routerLink="/descarga-guia" (click)="closeMenu()" class="block w-full bg-pastel-green hover:bg-pastel-green-dark text-neutral-800 font-medium py-2 px-4 rounded-2xl text-md transition-colors text-center">
             Descarga la guía gratuita
           </a>
         </div>
