@@ -29,7 +29,7 @@
         </p>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+      <div class="space-y-12 max-w-4xl mx-auto mb-16">
         <!-- Individual Sessions -->
         <div class="card hover:shadow-lg transition-shadow">
           <div class="text-center mb-8">
@@ -78,9 +78,11 @@
           </div>
 
           <div class="text-center">
-            <button class="btn-primary w-full mb-3">
+            <a [routerLink]="['/contacto']"
+               [queryParams]="{subject: 'session', message: 'Hola! Me gustaría agendar mi primera sesión gratuita de 30 minutos para conocernos y hablar sobre mi situación.'}"
+               class="btn-primary w-full mb-3 block">
               Reservar sesión gratuita de 30 min
-            </button>
+            </a>
             <p class="text-sm text-neutral-500">
               Conversemos sobre tus necesidades específicas
             </p>

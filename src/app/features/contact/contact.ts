@@ -2,6 +2,7 @@ import { Component, signal, OnInit } from '@angular/core';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../../../environments/environment';
+import { CONTACT_SUBJECT_OPTIONS } from '../../shared/constants/contact-subjects';
 
 @Component({
   selector: 'app-contact',
@@ -21,15 +22,8 @@ export class Contact implements OnInit {
   isSuccess = signal(false);
   errorMessage = signal('');
 
-  // Subject options
-  subjectOptions = [
-    { value: '', label: 'Selecciona un asunto' },
-    { value: 'session', label: 'Consulta sobre sesiones personalizadas' },
-    { value: 'ebook-free', label: 'Pregunta sobre la guía gratuita' },
-    { value: 'ebook-paid', label: 'Quiero comprar el ebook (5€)' },
-    { value: 'collaboration', label: 'Propuesta de colaboración' },
-    { value: 'other', label: 'Otro motivo / solo quiero charlar 🌿' }
-  ];
+  // Subject options (importadas desde constantes compartidas)
+  subjectOptions = CONTACT_SUBJECT_OPTIONS;
 
   constructor(private route: ActivatedRoute) {}
 

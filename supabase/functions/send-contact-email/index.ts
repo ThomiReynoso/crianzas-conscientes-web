@@ -43,12 +43,12 @@ Deno.serve(async (req) => {
     }
 
     // Mapear subject a texto legible
+    // IMPORTANTE: Mantener sincronizado con src/app/shared/constants/contact-subjects.ts
     const subjectMap: Record<string, string> = {
       'session': 'Consulta sobre sesiones 1:1',
-      'ebook': 'Pregunta sobre el ebook gratuito',
-      'courses': 'Información sobre cursos futuros',
+      'ebook-free': 'Pregunta sobre la guía gratuita',
+      'ebook-paid': 'Quiero comprar el ebook (5€)',
       'collaboration': 'Propuesta de colaboración',
-      'media': 'Consulta de medios',
       'other': 'Otro tema'
     }
 
