@@ -49,7 +49,8 @@ Deno.serve(async (req) => {
       'ebook-free': 'Pregunta sobre la guía gratuita',
       'ebook-paid': 'Quiero comprar el ebook (5€)',
       'collaboration': 'Propuesta de colaboración',
-      'other': 'Otro tema'
+      'other': 'Otro tema',
+      'waitlist': 'Quiero ser notificado de talleres cuando esten disponibles'
     }
 
     const subjectText = subjectMap[subject] || subject

@@ -18,7 +18,8 @@ export const CONTACT_SUBJECT_OPTIONS: SubjectOption[] = [
   { value: 'ebook-free', label: 'Pregunta sobre la guía gratuita' },
   { value: 'ebook-paid', label: 'Quiero comprar el ebook (5€)' },
   { value: 'collaboration', label: 'Propuesta de colaboración' },
-  { value: 'other', label: 'Otro motivo / solo quiero charlar 🌿' }
+  { value: 'waitlist', label: 'Quiero ser notificado de talleres cuando esten disponibles' },
+  { value: 'other', label: 'Otro motivo / solo quiero charlar 🌿' },
 ];
 
 // Mapa para convertir el valor del subject a texto legible
@@ -28,5 +29,6 @@ export const CONTACT_SUBJECT_MAP: Record<string, string> = {
   'ebook-free': 'Pregunta sobre la guía gratuita',
   'ebook-paid': 'Quiero comprar el ebook (5€)',
   'collaboration': 'Propuesta de colaboración',
-  'other': 'Otro tema'
+  'other': 'Otro tema',
+  'waitlist': 'Quiero ser notificado de talleres cuando esten disponibles'
 };
