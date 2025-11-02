@@ -153,8 +153,10 @@
             <span>Primera llamada gratuita de 30 minutos para conocernos</span>
           </li>
         </ul>
-        <a href="https://wa.me/34631435841?text=Hola%20Mailen!%20Terminé%20tu%20ebook.%0AMe%20gustaría%20charlar%20con%20vos%20para%20seguir%20profundizando%20en%20este%20camino%20de%20crianza%20consciente." target="_blank" class="btn-primary w-full block text-center">
-          Reserva tu sesión
+        <a [routerLink]="['/servicios']"
+           [queryParams]="{subject: 'session', message: 'Hola! Me gustaría agendar mi primera sesión gratuita de 30 minutos para conocernos y hablar sobre mi situación.'}"
+           class="btn-primary w-full block text-center">
+          Más detalles de esta sesión
         </a>
       </div>
 
@@ -188,7 +190,7 @@
     </div>
 
     <div class="text-center mt-12">
-      <a routerLink="/servicios" class="text-pastel-green-dark hover:text-neutral-800 font-medium">
+      <a routerLink="/servicios"  class="btn-secondary text-center block">
         Ver todos los servicios →
       </a>
     </div>
