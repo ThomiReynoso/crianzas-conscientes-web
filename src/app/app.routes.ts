@@ -30,6 +30,10 @@ export const routes: Routes = [
     loadComponent: () => import('./features/recursos-digitales/recursos-digitales').then(m => m.RecursosDigitalesComponent)
   },
   {
+    path: 'politica-privacidad',
+    loadComponent: () => import('./features/privacy-policy/privacy-policy').then(m => m.PrivacyPolicyComponent)
+  },
+  {
     path: '**',
     redirectTo: ''
   }
