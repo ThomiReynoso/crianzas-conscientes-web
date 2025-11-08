@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { AnalyticsService } from '../../core/services/analytics.service';
 
 @Component({
   selector: 'app-home',
@@ -8,5 +9,9 @@ import { RouterLink } from '@angular/router';
   styleUrl: './home.scss',
 })
 export class Home {
+  private analytics = inject(AnalyticsService);
 
+  onSessionBookingClick() {
+    this.analytics.trackSessionBooking('home_page');
+  }
 }

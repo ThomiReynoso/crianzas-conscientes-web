@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { AnalyticsService } from '../../core/services/analytics.service';
 
 @Component({
   selector: 'app-services',
@@ -9,5 +10,13 @@ import { RouterLink } from '@angular/router';
   styleUrl: './services.scss',
 })
 export class Services {
+  private analytics = inject(AnalyticsService);
 
+  onSessionBookingClick() {
+    this.analytics.trackSessionBooking('services_page');
+  }
+
+  onInstagramClick() {
+    this.analytics.trackSocialClick('Instagram');
+  }
 }

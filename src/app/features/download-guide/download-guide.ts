@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { SupabaseService } from '../../core/services/supabase.service';
+import { AnalyticsService } from '../../core/services/analytics.service';
 
 @Component({
   selector: 'app-download-guide',
@@ -13,6 +14,7 @@ import { SupabaseService } from '../../core/services/supabase.service';
 })
 export class DownloadGuideComponent {
   private supabaseService = inject(SupabaseService);
+  private analytics = inject(AnalyticsService);
 
   email = signal('');
   isSubmitting = signal(false);
@@ -33,6 +35,8 @@ export class DownloadGuideComponent {
 
       if (result.success) {
         this.isSuccess.set(true);
+        // Track guide download event
+        this.analytics.trackGuideDownload('Límites con amor');
       } else {
         this.errorMessage.set(result.error || 'Hubo un error al procesar tu solicitud. Por favor, intenta nuevamente.');
       }

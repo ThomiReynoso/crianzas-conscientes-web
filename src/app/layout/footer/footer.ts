@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { AnalyticsService } from '../../core/services/analytics.service';
 
 @Component({
   selector: 'app-footer',
@@ -9,4 +10,9 @@ import { RouterLink } from '@angular/router';
 })
 export class Footer {
   protected readonly currentYear = new Date().getFullYear();
+  private analytics = inject(AnalyticsService);
+
+  onInstagramClick() {
+    this.analytics.trackSocialClick('Instagram');
+  }
 }

@@ -1,8 +1,9 @@
-import { Component, signal, OnInit } from '@angular/core';
+import { Component, signal, OnInit, inject } from '@angular/core';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../../../environments/environment';
 import { CONTACT_SUBJECT_OPTIONS } from '../../shared/constants/contact-subjects';
+import { AnalyticsService } from '../../core/services/analytics.service';
 
 @Component({
   selector: 'app-contact',
@@ -24,6 +25,7 @@ export class Contact implements OnInit {
 
   // Subject options (importadas desde constantes compartidas)
   subjectOptions = CONTACT_SUBJECT_OPTIONS;
+  private analytics = inject(AnalyticsService);
 
   constructor(private route: ActivatedRoute) {}
 
@@ -86,6 +88,15 @@ export class Contact implements OnInit {
 
       // Success
       this.isSuccess.set(true);
+
+      // Track contact form submission
+      this.analytics.trackContactForm(this.subject());
+
+      // Track session booking if subject is session
+      if (this.subject() === 'session') {
+        this.analytics.trackSessionBooking('contact_form');
+      }
+
       // Reset form
       this.name.set('');
       this.email.set('');
