@@ -61,22 +61,6 @@
           </h2>
 
           <form class="space-y-4" (ngSubmit)="onSubmit($event)">
-            <!-- Success Message -->
-            @if (isSuccess()) {
-              <div class="bg-pastel-green-light rounded-2xl p-3 border border-pastel-green">
-                <p class="text-neutral-800 font-medium text-sm">
-                  ¡Mensaje enviado con éxito! Te responderé lo antes posible 💚
-                </p>
-              </div>
-            }
-
-            <!-- Error Message -->
-            @if (errorMessage()) {
-              <div class="bg-red-50 rounded-2xl p-3 border border-red-200">
-                <p class="text-red-800 text-sm">{{ errorMessage() }}</p>
-              </div>
-            }
-
             <!-- Name -->
             <div>
               <label for="name" class="block text-sm font-medium text-neutral-700 mb-1.5">
@@ -170,6 +154,21 @@
             >
               {{ isSubmitting() ? 'Enviando...' : 'Enviar mensaje' }}
             </button>
+            <!-- Success Message -->
+            @if (isSuccess()) {
+              <div class="bg-pastel-green-light rounded-2xl p-3 border border-pastel-green">
+                <p class="text-neutral-800 font-medium text-sm">
+                  ¡Mensaje enviado con éxito! Te responderé lo antes posible 💚
+                </p>
+              </div>
+            }
+
+            <!-- Error Message -->
+            @if (errorMessage()) {
+              <div class="bg-red-50 rounded-2xl p-3 border border-red-200">
+                <p class="text-red-800 text-sm">{{ errorMessage() }}</p>
+              </div>
+            }
           </form>
           </div>
         </div>
