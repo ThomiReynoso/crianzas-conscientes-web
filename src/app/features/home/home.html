@@ -193,7 +193,7 @@
 <!-- Pain Points / Problem Awareness Section -->
 <section class="section bg-pastel-cream">
   <div class="container">
-    <div class="max-w-5xl mx-auto mb-12">
+    <div class="max-w-5xl mx-auto mb-12 mt-6">
       <!-- Header -->
       <div class="text-center mb-12">
         <h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-neutral-800 mb-6">
@@ -273,14 +273,15 @@
 </section>
 
 <!-- Services Preview -->
-<section class="section bg-pastel-green-light">
+<section class="section bg-gradient-to-br from-pastel-green-light to-pastel-cream">
   <div class="container">
     <div class="text-center mb-16">
       <h2 class="text-3xl md:text-4xl font-display font-bold text-neutral-800 mb-6">
-        ¿Cómo podemos trabajar juntos?
+        ¿Cómo puedo acompañarte?
       </h2>
       <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
-        Diferentes formas de acompañarte en tu camino hacia una crianza más consciente y conectada.
+       <span>Diferentes formas de acompañarte en tu proceso de criar con más calma, coherencia y presencia.</span>
+       <span> <br> <br>No se trata solo de cambiar lo que hacés, sino de entender desde dónde lo hacés.</span>
       </p>
     </div>
 
@@ -290,14 +291,24 @@
         <h3 class="text-2xl font-display font-semibold text-neutral-800 mb-4">
           Sesiones de Acompañamiento 1:1
         </h3>
-        <p class="text-neutral-600 mb-6">
-          Un espacio online para mirar tu crianza con más calma, presencia y conciencia.
-          A través del coaching parental y la educación infantil, te acompaño a encontrar tu propio estilo, transformando la culpa y el desborde en conexión y claridad.
+        <p class="text-neutral-600 mb-6"> 
+          Un espacio online donde podés traer tus dudas, tus miedos o esos momentos en los que sentís que no podés más. <br>
+          A través del coaching ontológico y la educación infantil, te acompaño a mirar lo que hay detrás de cada reacción, a sanar la culpa y transformar la exigencia en comprensión.          
         </p>
         <ul class="space-y-2 text-neutral-600 mb-6">
           <li class="flex items-start gap-2">
             <div class="w-1.5 h-1.5 bg-pastel-green-dark rounded-full mt-2 flex-shrink-0"></div>
             <span>Primera llamada gratuita de 30 minutos para conocernos</span>
+          </li>
+        <li class="flex items-start gap-2">
+            <div class="w-1.5 h-1.5 bg-pastel-green-dark rounded-full mt-2 flex-shrink-0"></div>
+            <span>Sesiones de una hora, online y personalizadas.
+            </span>
+          </li>
+          <li class="flex items-start gap-2">
+            <div class="w-1.5 h-1.5 bg-pastel-green-dark rounded-full mt-2 flex-shrink-0"></div>
+            <span>En cada encuentro, trabajamos herramientas reales y emocionales para acompañar desde un lugar más consciente.
+            </span>
           </li>
         </ul>
         <a [routerLink]="['/contacto']"
@@ -330,7 +341,7 @@
             <span>Totalmente gratuita</span>
           </li>
         </ul>
-        <a routerLink="/descarga-guia" class="btn-secondary w-full text-center block">
+        <a routerLink="/descarga-guia" class="btn-primary w-full text-center block">
           Descargar guía gratuita
         </a>
       </div>
@@ -338,28 +349,31 @@
 
     <div class="text-center mt-12">
       <a routerLink="/servicios"  class="btn-secondary text-center block">
-        Ver todos los servicios →
+        Conoce todos mis servicios
       </a>
     </div>
   </div>
 </section>
 
 <!-- CTA Section -->
-<section class="section bg-pastel-beige">
+<section class="section bg-gradient-to-br from-pastel-cream to-pastel-beige">
   <div class="container">
     <div class="text-center max-w-3xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-display font-bold text-neutral-800 mb-6">
-        ¿Lista para transformar tu crianza?
+        ¿Listo/a para transformar tu crianza?
       </h2>
       <p class="text-xl text-neutral-700 mb-8">
         Comienza hoy mismo descargando nuestra guía gratuita y da el primer paso hacia una crianza más consciente y conectada.
       </p>
-      <a routerLink="/descarga-guia" class="btn-primary text-lg px-8 py-4 mb-4 inline-block">
-        Descarga la guía gratuita
-      </a>
-      <p class="text-sm text-neutral-600">
-        Sin spam. Solo herramientas valiosas para tu familia.
-      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a [routerLink]="['/contacto']"
+           [queryParams]="{subject: 'session', message: 'Hola! Me gustaría agendar mi primera sesión gratuita de 30 minutos para conocernos y hablar sobre mi situación. [Dar contexto de la situación]'}" class="btn-primary text-lg px-8 py-4 mb-4 inline-block">
+          Agenda una sesión conmigo
+        </a>
+        <a routerLink="/descarga-guia" class="btn-secondary text-lg px-8 py-4 mb-4 inline-block">
+          Descarga la guía gratuita
+        </a>
+      </div>
     </div>
   </div>
 </section>
