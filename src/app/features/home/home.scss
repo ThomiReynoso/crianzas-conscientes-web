@@ -59,3 +59,54 @@
   position: relative;
   z-index: 10;
 }
+
+// Services Section with Video Background
+.services-video-bg {
+  position: relative;
+  overflow: hidden;
+  min-height: 600px;
+}
+
+.video-background {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  object-fit: cover;
+  pointer-events: none;
+
+  // En móviles, ajustar el video para que se vea mejor
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// Asegurar que el contenido esté por encima del video
+.services-video-bg .container {
+  position: relative;
+  z-index: 10;
+}
+
+// Cards transparentes para que se vea el video de fondo
+.services-video-bg .card {
+  background-color: rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  // Efecto hover
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  }
+}

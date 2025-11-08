@@ -1,0 +1,10 @@
+// Estilos específicos para la página de política de privacidad
+.prose {
+  h2 {
+    scroll-margin-top: 100px; // Para anchor links con header fijo
+  }
+
+  a {
+    word-break: break-word;
+  }
+}
