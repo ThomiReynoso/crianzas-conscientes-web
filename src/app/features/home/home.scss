@@ -5,6 +5,10 @@
   min-height: 600px;
 }
 
+.hero-img {
+  background-position: center 25% !important;
+}
+
 .parallax-bg {
   border-radius: -2px;
   position: absolute;
@@ -15,7 +19,7 @@
   pointer-events: none;
   background: url('/mini_mai.png');
   background-attachment: fixed !important;
-  background-position: 50% !important;
+  background-position: center 0% !important;
   background-repeat: no-repeat !important;
   background-size: cover !important;
   -webkit-background-size: cover !important;
@@ -30,8 +34,8 @@
 
   @media (max-width: 480px) {
     background-attachment: scroll !important;
-    background-position: center !important;
-    opacity: 0.9;
+    background-position: 65% center !important;
+    opacity: 1;
   }
 }
 

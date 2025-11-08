@@ -1,7 +1,7 @@
 <!-- Hero Section -->
 <section class="relative overflow-hidden bg-gradient-to-br from-pastel-beige-light via-pastel-cream to-pastel-sage-light">
   <!-- Background Image -->
-  <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-35" style="background-image: url('/Fondo.jpeg');"></div>
+  <div class="absolute hero-img inset-0 bg-cover bg-center bg-no-repeat opacity-40" style="background-image: url('/Fondo.jpeg');"></div>
   <div class="container relative z-10">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[90vh] py-8">
       <!-- Hero Content -->
@@ -121,12 +121,18 @@
           </p>
         </div>
       </div>
+
+      <div class="text-center mt-10">
+        <a routerLink="/quien-soy" class="btn-primary inline-block">
+          Quiero saber más
+        </a>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- About Me Section -->
-<section class="section about-me-parallax">
+<section id="sobre-mi" class="section about-me-parallax">
   <!-- Parallax Background -->
   <div class="parallax-bg"></div>
 
@@ -147,8 +153,8 @@
       </div>
 
       <!-- Content -->
-      <div class="bg-white/40 rounded-3xl p-8 md:p-12 shadow-sm border border-pastel-beige-light">
-        <div class="space-y-6 text-lg text-neutral-700 leading-relaxed">
+      <div class="bg-white/25 rounded-3xl p-8 md:p-12 shadow-sm border border-pastel-beige-light">
+        <div class="space-y-6 text-lg text-neutral-800 leading-relaxed">
           <p>
             Nací en San Martín de los Andes, un pueblo chico entre montañas donde mi infancia fue libertad, juegos y naturaleza.
             Crecí con la curiosidad de entender el mundo y con la certeza de que las infancias tienen algo sagrado: su forma de vivir el presente.
@@ -173,15 +179,15 @@
             Hoy uno lo que más amo —la educación infantil y el coaching ontológico— para ayudar a construir vínculos más conscientes, donde los adultos también se sientan vistos y acompañados.
           </p>
 
-          <p class="text-pastel-green-dark font-medium text-xl pt-4">
+          <p class="text-pastel-cream font-medium text-xl pt-4">
             Porque acompañar a un niño también es aprender a acompañarnos a nosotros mismos.
           </p>
         </div>
 
         <!-- CTA Button -->
         <div class="text-center mt-10">
-          <a routerLink="/quien-soy" class="btn-primary inline-block">
-            Conocer más sobre mi historia
+          <a href="#sobre-mi" class="btn-primary inline-block">
+            Conoceme un poco más
           </a>
         </div>
       </div>
