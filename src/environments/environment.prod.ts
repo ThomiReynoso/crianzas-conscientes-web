@@ -4,5 +4,13 @@ export const environment = {
   supabase: {
     url: 'https://fzkwslnlvnojsjzzysav.supabase.co',
     anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6a3dzbG5sdm5vanNqenp5c2F2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE1OTEyNDQsImV4cCI6MjA3NzE2NzI0NH0.RZgwIPcqmKdiWl_glRJIiJ7EMtXqgNSnxkuzEZAQbhk'
+  },
+  analytics: {
+    enabled: true, // Habilitar analytics SOLO en producción
+    measurementId: 'G-861WZ4PQ8E', // Tu Measurement ID de Google Analytics
+    productionDomains: [
+      'mailensteinbrenner.com',
+      'www.mailensteinbrenner.com'
+    ]
   }
 };

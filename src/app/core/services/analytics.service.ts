@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 declare global {
   interface Window {
@@ -12,9 +13,41 @@ declare global {
 export class AnalyticsService {
 
   /**
+   * Verifica si el dominio actual es un dominio de producción
+   */
+  private isProductionDomain(): boolean {
+    if (typeof window === 'undefined') {
+      return false;
+    }
+
+    const currentHostname = window.location.hostname;
+    const productionDomains = environment.analytics.productionDomains || [];
+
+    // Si no hay dominios definidos, considerar que está en local
+    if (productionDomains.length === 0) {
+      return false;
+    }
+
+    // Verificar si el dominio actual está en la lista
+    return productionDomains.some(domain => currentHostname === domain || currentHostname.endsWith(`.${domain}`));
+  }
+
+  /**
    * Track custom event
    */
   trackEvent(eventName: string, eventParams?: { [key: string]: any }) {
+    // Solo trackear si analytics está habilitado (producción)
+    if (!environment.analytics.enabled) {
+      console.log('🔧 [DEV MODE] Analytics disabled - Event would be tracked:', eventName, eventParams);
+      return;
+    }
+
+    // Verificar si estamos en un dominio de producción real
+    if (!this.isProductionDomain()) {
+      console.log('🎭 [STAGING/PREVIEW] Event would be tracked:', eventName, eventParams);
+      return;
+    }
+
     if (typeof window !== 'undefined' && window.gtag) {
       window.gtag('event', eventName, eventParams);
       console.log('📊 Event tracked:', eventName, eventParams);
@@ -25,6 +58,16 @@ export class AnalyticsService {
    * Track page view
    */
   trackPageView(url: string) {
+    if (!environment.analytics.enabled) {
+      console.log('🔧 [DEV MODE] Page view would be tracked:', url);
+      return;
+    }
+
+    if (!this.isProductionDomain()) {
+      console.log('🎭 [STAGING/PREVIEW] Page view would be tracked:', url);
+      return;
+    }
+
     if (typeof window !== 'undefined' && window.gtag) {
       window.gtag('event', 'page_view', {
         page_path: url
