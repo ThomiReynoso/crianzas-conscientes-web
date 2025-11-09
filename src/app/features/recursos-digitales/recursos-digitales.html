@@ -42,7 +42,7 @@
           </div>
 
           <div>
-            <a routerLink="/descarga-guia" class="btn-primary w-full text-center block text-lg py-4">
+            <a routerLink="/descarga-guia" (click)="onDownloadGuideClick()" class="btn-primary w-full text-center block text-lg py-4">
               Descargar ahora
             </a>
             <p class="text-sm text-neutral-500 text-center mt-3">
@@ -81,7 +81,7 @@
                 <div class="text-4xl font-bold text-pastel-green-dark">5 €</div>
               </div>
             </div>
-            <a [routerLink]="['/contacto']" [queryParams]="{subject: 'ebook-paid', message: 'Estoy interesadx en comprar el ebook'}" class="btn-primary w-full text-lg py-4 block text-center">
+            <a [routerLink]="['/contacto']" [queryParams]="{subject: 'ebook-paid', message: 'Estoy interesadx en comprar el ebook'}" (click)="onEbookPurchaseClick()" class="btn-primary w-full text-lg py-4 block text-center">
               Comprar ahora
             </a>
             <p class="text-sm text-neutral-500 text-center mt-3">
@@ -228,7 +228,7 @@
           <p class="text-neutral-600 mb-6">
             Invierte en ti y en tu familia. Este ebook es el primer paso hacia una crianza más consciente y conectada.
           </p>
-          <a [routerLink]="['/contacto']" [queryParams]="{subject: 'ebook-paid', message: 'Estoy interesadx en comprar el ebook'}" class="btn-primary text-lg px-12 py-4 inline-block">
+          <a [routerLink]="['/contacto']" [queryParams]="{subject: 'ebook-paid', message: 'Estoy interesadx en comprar el ebook'}" (click)="onEbookPurchaseClick()" class="btn-primary text-lg px-12 py-4 inline-block">
             Comprar ebook por 5 €
           </a>
         </div>

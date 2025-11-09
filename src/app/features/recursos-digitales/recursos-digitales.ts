@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { AnalyticsService } from '../../core/services/analytics.service';
 
 @Component({
   selector: 'app-recursos-digitales',
@@ -8,6 +9,19 @@ import { RouterLink } from '@angular/router';
   templateUrl: './recursos-digitales.html',
   styleUrl: './recursos-digitales.scss'
 })
-export class RecursosDigitalesComponent {
+export class RecursosDigitalesComponent implements OnInit {
+  private analytics = inject(AnalyticsService);
 
+  ngOnInit() {
+    // Track resource page view
+    this.analytics.trackResourceView('Recursos Digitales');
+  }
+
+  onEbookPurchaseClick() {
+    this.analytics.trackEbookPurchase('Guía práctica crianza consciente');
+  }
+
+  onDownloadGuideClick() {
+    this.analytics.trackCtaClick('Descargar guía gratuita', 'recursos-digitales', '/descarga-guia');
+  }
 }
