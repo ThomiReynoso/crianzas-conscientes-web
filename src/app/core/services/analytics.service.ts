@@ -23,9 +23,9 @@ export class AnalyticsService {
     const currentHostname = window.location.hostname;
     const productionDomains = environment.analytics.productionDomains || [];
 
-    // Si no hay dominios definidos, considerar que está en producción
+    // Si no hay dominios definidos, considerar que está en local
     if (productionDomains.length === 0) {
-      return true;
+      return false;
     }
 
     // Verificar si el dominio actual está en la lista
