@@ -7,6 +7,10 @@ export const environment = {
   },
   analytics: {
     enabled: true, // Habilitar analytics SOLO en producción
-    measurementId: 'G-861WZ4PQ8E' // Tu Measurement ID de Google Analytics
+    measurementId: 'G-861WZ4PQ8E', // Tu Measurement ID de Google Analytics
+    productionDomains: [
+      'mailensteinbrenner.com',
+      'www.mailensteinbrenner.com'
+    ]
   }
 };

@@ -8,6 +8,7 @@ export const environment = {
   },
   analytics: {
     enabled: false, // Deshabilitar analytics en desarrollo
-    measurementId: '' // No cargar GA4 en desarrollo
+    measurementId: '', // No cargar GA4 en desarrollo
+    productionDomains: [] // No hay dominios de producción en desarrollo
   }
 };

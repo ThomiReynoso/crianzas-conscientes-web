@@ -10,6 +10,22 @@ export class GaLoaderService {
   private loaded = false;
 
   /**
+   * Verifica si el dominio actual es un dominio de producción
+   */
+  private isProductionDomain(): boolean {
+    const currentHostname = window.location.hostname;
+    const productionDomains = environment.analytics.productionDomains || [];
+
+    // Si no hay dominios definidos, considerar que está en producción
+    if (productionDomains.length === 0) {
+      return true;
+    }
+
+    // Verificar si el dominio actual está en la lista
+    return productionDomains.some(domain => currentHostname === domain || currentHostname.endsWith(`.${domain}`));
+  }
+
+  /**
    * Carga Google Analytics 4 solo en producción y solo en el navegador
    */
   loadGoogleAnalytics(): void {
@@ -21,6 +37,14 @@ export class GaLoaderService {
     // Solo cargar si analytics está habilitado (producción)
     if (!environment.analytics.enabled || !environment.analytics.measurementId) {
       console.log('🔧 [DEV MODE] Google Analytics NOT loaded (development environment)');
+      return;
+    }
+
+    // Verificar si estamos en un dominio de producción real
+    if (!this.isProductionDomain()) {
+      console.log('🎭 [STAGING/PREVIEW] Google Analytics NOT loaded - Not a production domain');
+      console.log(`   Current: ${window.location.hostname}`);
+      console.log(`   Production domains: ${environment.analytics.productionDomains.join(', ')}`);
       return;
     }
 
