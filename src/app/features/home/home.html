@@ -21,7 +21,7 @@
         
         <!-- CTA Buttons -->
         <div class="flex flex-col sm:flex-row gap-4">
-          <a routerLink="/descarga-guia" class="btn-primary text-lg px-8 py-4 text-center">
+          <a routerLink="/descarga-guia" (click)="onDownloadGuideClick()" class="btn-primary text-lg px-8 py-4 text-center">
             Descarga la guía gratuita
           </a>
         </div>
@@ -322,6 +322,7 @@
         </ul>
         <a [routerLink]="['/contacto']"
            [queryParams]="{subject: 'session', message: 'Hola! Me gustaría agendar mi primera sesión gratuita de 30 minutos para conocernos y hablar sobre mi situación. [Dar contexto de la situación]'}"
+           (click)="onSessionBookingClick()"
            class="btn-primary w-full block text-center">
            Agendar mi primera sesión
         </a>
@@ -350,7 +351,7 @@
             <span>Totalmente gratuita</span>
           </li>
         </ul>
-        <a routerLink="/descarga-guia" class="btn-primary w-full text-center block">
+        <a routerLink="/descarga-guia" (click)="onDownloadGuideClick()" class="btn-primary w-full text-center block">
           Descargar guía gratuita
         </a>
       </div>
@@ -376,10 +377,12 @@
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a [routerLink]="['/contacto']"
-           [queryParams]="{subject: 'session', message: 'Hola! Me gustaría agendar mi primera sesión gratuita de 30 minutos para conocernos y hablar sobre mi situación. [Dar contexto de la situación]'}" class="btn-primary text-lg px-8 py-4 mb-4 inline-block">
+           [queryParams]="{subject: 'session', message: 'Hola! Me gustaría agendar mi primera sesión gratuita de 30 minutos para conocernos y hablar sobre mi situación. [Dar contexto de la situación]'}"
+           (click)="onSessionBookingClick()"
+           class="btn-primary text-lg px-8 py-4 mb-4 inline-block">
           Agenda una sesión conmigo
         </a>
-        <a routerLink="/descarga-guia" class="btn-secondary text-lg px-8 py-4 mb-4 inline-block">
+        <a routerLink="/descarga-guia" (click)="onDownloadGuideClick()" class="btn-secondary text-lg px-8 py-4 mb-4 inline-block">
           Descarga la guía gratuita
         </a>
       </div>

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { SupabaseService } from '../../core/services/supabase.service';
+import { AnalyticsService } from '../../core/services/analytics.service';
 
 @Component({
   selector: 'app-download-guide',
@@ -13,6 +14,7 @@ import { SupabaseService } from '../../core/services/supabase.service';
 })
 export class DownloadGuideComponent {
   private supabaseService = inject(SupabaseService);
+  private analytics = inject(AnalyticsService);
 
   email = signal('');
   isSubmitting = signal(false);
@@ -28,6 +30,9 @@ export class DownloadGuideComponent {
     this.errorMessage.set('');
 
     try {
+      // Track guide download attempt (incluso si Supabase falla)
+      this.analytics.trackGuideDownload('Límites con amor');
+
       // Guardar email en Supabase
       const result = await this.supabaseService.saveGuideDownload(this.email(), 'descarga-guia');
 
