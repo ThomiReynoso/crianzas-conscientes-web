@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 declare global {
   interface Window {
@@ -15,6 +16,12 @@ export class AnalyticsService {
    * Track custom event
    */
   trackEvent(eventName: string, eventParams?: { [key: string]: any }) {
+    // Solo trackear si analytics está habilitado (producción)
+    if (!environment.analytics.enabled) {
+      console.log('🔧 [DEV MODE] Analytics disabled - Event would be tracked:', eventName, eventParams);
+      return;
+    }
+
     if (typeof window !== 'undefined' && window.gtag) {
       window.gtag('event', eventName, eventParams);
       console.log('📊 Event tracked:', eventName, eventParams);
@@ -25,6 +32,11 @@ export class AnalyticsService {
    * Track page view
    */
   trackPageView(url: string) {
+    if (!environment.analytics.enabled) {
+      console.log('🔧 [DEV MODE] Page view would be tracked:', url);
+      return;
+    }
+
     if (typeof window !== 'undefined' && window.gtag) {
       window.gtag('event', 'page_view', {
         page_path: url
