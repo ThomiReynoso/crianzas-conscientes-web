@@ -19,4 +19,8 @@ export class Services {
   onInstagramClick() {
     this.analytics.trackSocialClick('Instagram');
   }
+
+  onDownloadGuideClick() {
+    this.analytics.trackCtaClick('Descargar guía gratuita', 'services', '/descarga-guia');
+  }
 }

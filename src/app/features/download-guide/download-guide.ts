@@ -30,13 +30,14 @@ export class DownloadGuideComponent {
     this.errorMessage.set('');
 
     try {
+      // Track guide download attempt (incluso si Supabase falla)
+      this.analytics.trackGuideDownload('Límites con amor');
+
       // Guardar email en Supabase
       const result = await this.supabaseService.saveGuideDownload(this.email(), 'descarga-guia');
 
       if (result.success) {
         this.isSuccess.set(true);
-        // Track guide download event
-        this.analytics.trackGuideDownload('Límites con amor');
       } else {
         this.errorMessage.set(result.error || 'Hubo un error al procesar tu solicitud. Por favor, intenta nuevamente.');
       }

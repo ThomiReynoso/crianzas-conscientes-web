@@ -20,4 +20,8 @@ export class RecursosDigitalesComponent implements OnInit {
   onEbookPurchaseClick() {
     this.analytics.trackEbookPurchase('Guía práctica crianza consciente');
   }
+
+  onDownloadGuideClick() {
+    this.analytics.trackCtaClick('Descargar guía gratuita', 'recursos-digitales', '/descarga-guia');
+  }
 }

@@ -14,4 +14,8 @@ export class Home {
   onSessionBookingClick() {
     this.analytics.trackSessionBooking('home_page');
   }
+
+  onDownloadGuideClick() {
+    this.analytics.trackCtaClick('Descargar guía gratuita', 'home', '/descarga-guia');
+  }
 }

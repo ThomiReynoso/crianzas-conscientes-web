@@ -124,7 +124,7 @@
               👉 Descarga inmediata y gratuita.
             </p>
             <div class="mt-4">
-              <a routerLink="/descarga-guia" class="btn-primary w-full block text-center">
+              <a routerLink="/descarga-guia" (click)="onDownloadGuideClick()" class="btn-primary w-full block text-center">
                 Descargar guía gratuita
               </a>
             </div>
@@ -333,7 +333,7 @@
            class="btn-primary text-lg px-8 py-4">
           Reservar sesión gratuita
         </a>
-        <a routerLink="/descarga-guia" class="btn-secondary text-lg px-8 py-4">
+        <a routerLink="/descarga-guia" (click)="onDownloadGuideClick()" class="btn-secondary text-lg px-8 py-4">
           Descargar guía gratuita
         </a>
       </div>

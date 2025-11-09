@@ -47,7 +47,7 @@
 
       <!-- CTA Button -->
       <div class="hidden lg:block">
-          <a routerLink="/descarga-guia" class="btn-primary text-md px-4 py-2">
+          <a routerLink="/descarga-guia" (click)="onDownloadGuideClick()" class="btn-primary text-md px-4 py-2">
             Descarga la guía gratuita
           </a>
       </div>
@@ -107,7 +107,7 @@
           Contacto
         </a>
         <div class="pt-4">
-          <a routerLink="/descarga-guia" (click)="closeMenu()" class="block w-full bg-pastel-green hover:bg-pastel-green-dark text-pastel-cream font-medium py-2 px-4 rounded-2xl text-md transition-colors text-center">
+          <a routerLink="/descarga-guia" (click)="onDownloadGuideClick()" (click)="closeMenu()" class="block w-full bg-pastel-green hover:bg-pastel-green-dark text-pastel-cream font-medium py-2 px-4 rounded-2xl text-md transition-colors text-center">
             Descarga la guía gratuita
           </a>
         </div>

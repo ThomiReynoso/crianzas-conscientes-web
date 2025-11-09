@@ -109,4 +109,8 @@ export class Contact implements OnInit {
       this.isSubmitting.set(false);
     }
   }
+
+  onDownloadGuideClick() {
+    this.analytics.trackCtaClick('Descargar guía gratuita', 'contact', '/descarga-guia');
+  }
 }

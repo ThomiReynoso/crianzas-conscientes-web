@@ -112,4 +112,17 @@ export class AnalyticsService {
       label: 'Resource Page View'
     });
   }
+
+  /**
+   * Track CTA button click (Call To Action)
+   */
+  trackCtaClick(ctaName: string, source: string, destination: string) {
+    this.trackEvent('cta_click', {
+      cta_name: ctaName,
+      source_page: source,
+      destination: destination,
+      category: 'engagement',
+      label: 'CTA Click'
+    });
+  }
 }
