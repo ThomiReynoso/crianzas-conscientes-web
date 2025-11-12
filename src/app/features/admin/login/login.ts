@@ -8,68 +8,7 @@ import { SupabaseService } from '../../../core/services/supabase.service';
   selector: 'app-admin-login',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterLink],
-  template: `
-    <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-rose-50 to-pink-100 px-4">
-      <div class="max-w-md w-full bg-white rounded-2xl shadow-xl p-8">
-        <div class="text-center mb-8">
-          <h1 class="text-3xl font-bold text-gray-800 mb-2">Panel de Administración</h1>
-          <p class="text-gray-600">Crianzas Conscientes</p>
-        </div>
-
-        @if (errorMessage) {
-          <div class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-            <p class="text-red-700 text-sm">{{ errorMessage }}</p>
-          </div>
-        }
-
-        <form (ngSubmit)="onLogin()" class="space-y-6">
-          <div>
-            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              [(ngModel)]="email"
-              name="email"
-              required
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none transition"
-              placeholder="admin@ejemplo.com"
-            />
-          </div>
-
-          <div>
-            <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
-              Contraseña
-            </label>
-            <input
-              type="password"
-              id="password"
-              [(ngModel)]="password"
-              name="password"
-              required
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none transition"
-              placeholder="••••••••"
-            />
-          </div>
-
-          <button
-            type="submit"
-            [disabled]="loading"
-            class="w-full bg-rose-600 text-white py-3 rounded-lg font-medium hover:bg-rose-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
-          >
-            {{ loading ? 'Ingresando...' : 'Ingresar' }}
-          </button>
-        </form>
-
-        <div class="mt-6 text-center">
-          <a routerLink="/" class="text-sm text-rose-600 hover:text-rose-700">
-            ← Volver al sitio
-          </a>
-        </div>
-      </div>
-    </div>
-  `,
+  templateUrl: './login.html',
   styles: []
 })
 export class AdminLoginComponent {
