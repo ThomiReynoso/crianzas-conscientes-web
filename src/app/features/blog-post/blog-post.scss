@@ -1,13 +1,13 @@
 // Post Content Styling
 .post-content {
-  color: theme('colors.neutral.700');
+  color: #404040;
   line-height: 1.8;
 
   // Headings
   :deep(h1), :deep(h2), :deep(h3), :deep(h4), :deep(h5), :deep(h6) {
-    font-family: theme('fontFamily.display');
+    font-family: 'Gloria Hallelujah', cursive;
     font-weight: 700;
-    color: theme('colors.neutral.800');
+    color: #262626;
     margin-top: 2rem;
     margin-bottom: 1rem;
     line-height: 1.3;
@@ -66,7 +66,7 @@
   // Strong and emphasis
   :deep(strong) {
     font-weight: 700;
-    color: theme('colors.neutral.800');
+    color: #262626;
   }
 
   :deep(em) {
@@ -75,24 +75,24 @@
 
   // Blockquotes
   :deep(blockquote) {
-    border-left: 4px solid theme('colors.pastel-green.DEFAULT');
+    border-left: 4px solid #539f4a;
     padding-left: 1.5rem;
     margin: 2rem 0;
     font-style: italic;
-    color: theme('colors.neutral.600');
-    background-color: theme('colors.pastel-beige.light');
+    color: #525252;
+    background-color: #F5F5DC;
     padding: 1.5rem;
     border-radius: 0.5rem;
   }
 
   // Links
   :deep(a) {
-    color: theme('colors.pastel-green-dark');
+    color: #439639;
     text-decoration: underline;
     transition: color 0.2s ease;
 
     &:hover {
-      color: theme('colors.pastel-green.DEFAULT');
+      color: #539f4a;
     }
   }
 
@@ -105,36 +105,36 @@
   }
 
   :deep(th) {
-    background-color: theme('colors.pastel-green.light');
-    color: theme('colors.neutral.800');
+    background-color: #a8c66c;
+    color: #262626;
     font-weight: 700;
     padding: 0.75rem;
     text-align: left;
-    border: 1px solid theme('colors.pastel-beige.DEFAULT');
+    border: 1px solid #F0E68C;
   }
 
   :deep(td) {
     padding: 0.75rem;
-    border: 1px solid theme('colors.pastel-beige.DEFAULT');
+    border: 1px solid #F0E68C;
   }
 
   :deep(tr:nth-child(even)) {
-    background-color: theme('colors.pastel-beige.light');
+    background-color: #F5F5DC;
   }
 
   // Code
   :deep(code) {
-    background-color: theme('colors.pastel-beige.light');
+    background-color: #F5F5DC;
     padding: 0.2rem 0.4rem;
     border-radius: 0.25rem;
     font-size: 0.875em;
     font-family: monospace;
-    color: theme('colors.neutral.800');
+    color: #262626;
   }
 
   :deep(pre) {
-    background-color: theme('colors.neutral.800');
-    color: theme('colors.pastel-cream');
+    background-color: #262626;
+    color: #FFFEF7;
     padding: 1.5rem;
     border-radius: 0.5rem;
     overflow-x: auto;
@@ -150,7 +150,7 @@
   // Horizontal rule
   :deep(hr) {
     border: none;
-    border-top: 2px solid theme('colors.pastel-beige.DEFAULT');
+    border-top: 2px solid #F0E68C;
     margin: 3rem 0;
   }
 
@@ -167,17 +167,17 @@
 .tag-large {
   display: inline-block;
   padding: 0.5rem 1rem;
-  background-color: theme('colors.pastel-beige-light');
+  background-color: #F5F5DC;
   border-radius: 1.5rem;
   font-size: 0.875rem;
-  color: theme('colors.neutral.700');
+  color: #404040;
   font-weight: 500;
-  border: 1px solid theme('colors.pastel-beige.DEFAULT');
+  border: 1px solid #F0E68C;
   transition: all 0.2s ease;
 
   &:hover {
-    background-color: theme('colors.pastel-green.light');
-    border-color: theme('colors.pastel-green.DEFAULT');
+    background-color: #a8c66c;
+    border-color: #539f4a;
   }
 }
 
@@ -189,16 +189,16 @@
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
-  background-color: theme('colors.pastel-beige-light');
-  color: theme('colors.neutral.700');
-  border: 1px solid theme('colors.pastel-beige.DEFAULT');
+  background-color: #F5F5DC;
+  color: #404040;
+  border: 1px solid #F0E68C;
   transition: all 0.2s ease;
   cursor: pointer;
 
   &:hover {
-    background-color: theme('colors.pastel-green.DEFAULT');
+    background-color: #539f4a;
     color: white;
-    border-color: theme('colors.pastel-green-dark');
+    border-color: #439639;
     transform: translateY(-2px);
   }
 }
@@ -227,7 +227,7 @@
   width: 100%;
   height: 200px;
   overflow: hidden;
-  background-color: theme('colors.pastel-beige.light');
+  background-color: #F5F5DC;
 
   img {
     transition: transform 0.3s ease;

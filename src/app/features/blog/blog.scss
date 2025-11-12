@@ -3,21 +3,21 @@
   padding: 0.5rem 1.25rem;
   border-radius: 2rem;
   background-color: white;
-  border: 2px solid theme('colors.pastel-beige.light');
-  color: theme('colors.neutral.700');
+  border: 2px solid #F5F5DC;
+  color: #404040;
   font-weight: 500;
   transition: all 0.3s ease;
   cursor: pointer;
 
   &:hover {
-    border-color: theme('colors.pastel-green.DEFAULT');
-    background-color: theme('colors.pastel-green.light');
+    border-color: #539f4a;
+    background-color: #a8c66c;
     transform: translateY(-2px);
   }
 
   &.active {
-    background-color: theme('colors.pastel-green.DEFAULT');
-    border-color: theme('colors.pastel-green-dark');
+    background-color: #539f4a;
+    border-color: #439639;
     color: white;
   }
 }
@@ -53,7 +53,7 @@
   width: 100%;
   height: 240px;
   overflow: hidden;
-  background-color: theme('colors.pastel-beige.light');
+  background-color: #F5F5DC;
 
   img {
     transition: transform 0.3s ease;
@@ -75,20 +75,20 @@
   border-radius: 1.5rem;
   font-size: 0.875rem;
   font-weight: 600;
-  color: theme('colors.neutral.700');
-  border: 1px solid theme('colors.pastel-beige.DEFAULT');
+  color: #404040;
+  border: 1px solid #F0E68C;
 }
 
 // Tags
 .tag {
   display: inline-block;
   padding: 0.25rem 0.75rem;
-  background-color: theme('colors.pastel-beige-light');
+  background-color: #F5F5DC;
   border-radius: 1rem;
   font-size: 0.75rem;
-  color: theme('colors.neutral.600');
+  color: #525252;
   font-weight: 500;
-  border: 1px solid theme('colors.pastel-beige.DEFAULT');
+  border: 1px solid #F0E68C;
 }
 
 // Line Clamp utilities (fallback for browsers that don't support it)
