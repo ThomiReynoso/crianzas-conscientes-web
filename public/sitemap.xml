@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.mailensteinbrenner.com/</loc>
     <lastmod>2025-01-26</lastmod>
@@ -30,4 +33,23 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://www.mailensteinbrenner.com/blog</loc>
+    <lastmod>2025-01-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!--
+    NOTA: Las URLs individuales de posts del blog deben ser agregadas dinámicamente.
+    Ver BLOG_SEO_SETUP.md para instrucciones sobre cómo generar el sitemap dinámicamente.
+
+    Por ahora, después de crear un post en el CMS, agrega manualmente la URL aquí:
+
+    <url>
+      <loc>https://www.mailensteinbrenner.com/blog/slug-del-post</loc>
+      <lastmod>YYYY-MM-DD</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+    </url>
+  -->
 </urlset>
