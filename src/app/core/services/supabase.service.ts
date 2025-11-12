@@ -48,7 +48,19 @@ export class SupabaseService {
           auth: {
             persistSession: true, // Persistir sesión para admin
             autoRefreshToken: true, // Auto-refrescar tokens
-            detectSessionInUrl: true // Detectar sesión en URL
+            detectSessionInUrl: true, // Detectar sesión en URL
+            // Aumentar el timeout del lock para evitar errores de concurrencia
+            lock: {
+              acquireTimeout: 10000 // 10 segundos en lugar del default
+            }
+          },
+          db: {
+            schema: 'public'
+          },
+          global: {
+            headers: {
+              'x-client-info': 'crianzas-conscientes-web'
+            }
           }
         }
       );
@@ -58,10 +70,15 @@ export class SupabaseService {
         this.currentUserSubject.next(session?.user ?? null);
       });
 
-      // Obtener sesión actual al iniciar
-      this.supabase.auth.getSession().then(({ data: { session } }) => {
-        this.currentUserSubject.next(session?.user ?? null);
-      });
+      // Obtener sesión actual al iniciar (con manejo de errores)
+      this.supabase.auth.getSession()
+        .then(({ data: { session } }) => {
+          this.currentUserSubject.next(session?.user ?? null);
+        })
+        .catch((error) => {
+          console.warn('Error obteniendo sesión inicial:', error);
+          this.currentUserSubject.next(null);
+        });
     }
   }
 
@@ -291,7 +308,7 @@ export class SupabaseService {
    */
   async getAllPublishedBlogPosts(): Promise<BlogPost[]> {
     if (!this.supabase) {
-      console.error('Supabase no está disponible');
+      // No es un error, simplemente estamos en el servidor
       return [];
     }
 
@@ -303,13 +320,16 @@ export class SupabaseService {
         .order('published_date', { ascending: false });
 
       if (error) {
-        console.error('Error obteniendo posts:', error);
+        // Solo mostrar error si es algo diferente a "no existe la tabla" (cuando aún no se ha configurado)
+        if (!error.message.includes('relation "public.blog_posts" does not exist')) {
+          console.error('Error obteniendo posts:', error);
+        }
         return [];
       }
 
       return data || [];
     } catch (error) {
-      console.error('Error inesperado:', error);
+      console.error('Error inesperado obteniendo posts:', error);
       return [];
     }
   }
@@ -319,7 +339,6 @@ export class SupabaseService {
    */
   async getAllBlogPosts(): Promise<BlogPost[]> {
     if (!this.supabase) {
-      console.error('Supabase no está disponible');
       return [];
     }
 
@@ -330,13 +349,16 @@ export class SupabaseService {
         .order('created_at', { ascending: false });
 
       if (error) {
-        console.error('Error obteniendo posts:', error);
+        // Solo mostrar error si es algo diferente a "no existe la tabla"
+        if (!error.message.includes('relation "public.blog_posts" does not exist')) {
+          console.error('Error obteniendo posts (admin):', error);
+        }
         return [];
       }
 
       return data || [];
     } catch (error) {
-      console.error('Error inesperado:', error);
+      console.error('Error inesperado obteniendo posts (admin):', error);
       return [];
     }
   }
@@ -346,7 +368,6 @@ export class SupabaseService {
    */
   async getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
     if (!this.supabase) {
-      console.error('Supabase no está disponible');
       return null;
     }
 
@@ -358,13 +379,17 @@ export class SupabaseService {
         .single();
 
       if (error) {
-        console.error('Error obteniendo post:', error);
+        // Solo mostrar error si no es "not found" o "no existe la tabla"
+        if (!error.message.includes('relation "public.blog_posts" does not exist') &&
+            error.code !== 'PGRST116') { // PGRST116 es el código de "no rows returned"
+          console.error('Error obteniendo post por slug:', error);
+        }
         return null;
       }
 
       return data;
     } catch (error) {
-      console.error('Error inesperado:', error);
+      console.error('Error inesperado obteniendo post por slug:', error);
       return null;
     }
   }

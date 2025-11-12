@@ -1,4 +1,5 @@
-import { Injectable, signal, inject } from '@angular/core';
+import { Injectable, signal, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { BlogPost, BlogCategory } from '../models/blog-post.interface';
 import { SupabaseService, BlogPost as SupabaseBlogPost } from './supabase.service';
 
@@ -7,17 +8,26 @@ import { SupabaseService, BlogPost as SupabaseBlogPost } from './supabase.servic
 })
 export class BlogService {
   private supabaseService = inject(SupabaseService);
+  private platformId = inject(PLATFORM_ID);
   private posts = signal<BlogPost[]>([]);
   private isLoadedFromSupabase = signal<boolean>(false);
 
   constructor() {
-    this.loadPostsFromSupabase();
+    // Solo cargar posts desde Supabase en el navegador, no en el servidor
+    if (isPlatformBrowser(this.platformId)) {
+      this.loadPostsFromSupabase();
+    }
   }
 
   /**
-   * Carga posts desde Supabase
+   * Carga posts desde Supabase (solo en navegador)
    */
   private async loadPostsFromSupabase() {
+    // Verificación adicional de seguridad
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     try {
       const supabasePosts = await this.supabaseService.getAllPublishedBlogPosts();
       if (supabasePosts && supabasePosts.length > 0) {
@@ -26,13 +36,12 @@ export class BlogService {
         this.posts.set(convertedPosts);
         this.isLoadedFromSupabase.set(true);
       } else {
-        // Si no hay posts en Supabase, usar los datos iniciales como fallback
-        console.warn('No se encontraron posts en Supabase, usando datos locales como fallback');
+        // Si no hay posts en Supabase, mantener array vacío
         this.posts.set([]);
       }
     } catch (error) {
       console.error('Error cargando posts desde Supabase:', error);
-      // En caso de error, usar datos locales como fallback
+      // En caso de error, mantener array vacío
       this.posts.set([]);
     }
   }
