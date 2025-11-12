@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -32,6 +33,20 @@ export const routes: Routes = [
   {
     path: 'politica-privacidad',
     loadComponent: () => import('./features/privacy-policy/privacy-policy').then(m => m.PrivacyPolicyComponent)
+  },
+  // Admin Routes
+  {
+    path: 'admin/login',
+    loadComponent: () => import('./features/admin/login/login').then(m => m.AdminLoginComponent)
+  },
+  {
+    path: 'admin/dashboard',
+    loadComponent: () => import('./features/admin/dashboard/dashboard').then(m => m.AdminDashboardComponent),
+    canActivate: [authGuard]
+  },
+  {
+    path: 'admin',
+    redirectTo: 'admin/dashboard'
   },
   {
     path: 'blog',
