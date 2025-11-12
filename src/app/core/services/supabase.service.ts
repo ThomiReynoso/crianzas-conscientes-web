@@ -11,6 +11,24 @@ export interface GuideDownload {
   source_page?: string;
 }
 
+export interface BlogPost {
+  id?: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  author: string;
+  published_date: string;
+  updated_date?: string;
+  image_url?: string;
+  category: string;
+  tags: string[];
+  reading_time: number;
+  featured: boolean;
+  is_published: boolean;
+  created_at?: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -263,6 +281,295 @@ export class SupabaseService {
       };
     } catch (error) {
       return { total: 0, bySource: {} };
+    }
+  }
+
+  // ==================== BLOG POSTS METHODS ====================
+
+  /**
+   * Obtiene todos los posts del blog (publicados)
+   */
+  async getAllPublishedBlogPosts(): Promise<BlogPost[]> {
+    if (!this.supabase) {
+      console.error('Supabase no está disponible');
+      return [];
+    }
+
+    try {
+      const { data, error } = await this.supabase
+        .from('blog_posts')
+        .select('*')
+        .eq('is_published', true)
+        .order('published_date', { ascending: false });
+
+      if (error) {
+        console.error('Error obteniendo posts:', error);
+        return [];
+      }
+
+      return data || [];
+    } catch (error) {
+      console.error('Error inesperado:', error);
+      return [];
+    }
+  }
+
+  /**
+   * Obtiene todos los posts (incluye borradores) - Solo para admin
+   */
+  async getAllBlogPosts(): Promise<BlogPost[]> {
+    if (!this.supabase) {
+      console.error('Supabase no está disponible');
+      return [];
+    }
+
+    try {
+      const { data, error } = await this.supabase
+        .from('blog_posts')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Error obteniendo posts:', error);
+        return [];
+      }
+
+      return data || [];
+    } catch (error) {
+      console.error('Error inesperado:', error);
+      return [];
+    }
+  }
+
+  /**
+   * Obtiene un post por su slug
+   */
+  async getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
+    if (!this.supabase) {
+      console.error('Supabase no está disponible');
+      return null;
+    }
+
+    try {
+      const { data, error } = await this.supabase
+        .from('blog_posts')
+        .select('*')
+        .eq('slug', slug)
+        .single();
+
+      if (error) {
+        console.error('Error obteniendo post:', error);
+        return null;
+      }
+
+      return data;
+    } catch (error) {
+      console.error('Error inesperado:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Crea un nuevo post
+   */
+  async createBlogPost(post: Omit<BlogPost, 'id' | 'created_at' | 'updated_date'>): Promise<{ success: boolean; error?: string; data?: BlogPost }> {
+    if (!this.supabase) {
+      return { success: false, error: 'Servicio no disponible' };
+    }
+
+    try {
+      const { data, error } = await this.supabase
+        .from('blog_posts')
+        .insert([post])
+        .select()
+        .single();
+
+      if (error) {
+        console.error('Error creando post:', error);
+        return { success: false, error: error.message };
+      }
+
+      return { success: true, data };
+    } catch (error: any) {
+      console.error('Error inesperado:', error);
+      return { success: false, error: error.message || 'Error desconocido' };
+    }
+  }
+
+  /**
+   * Actualiza un post existente
+   */
+  async updateBlogPost(id: string, updates: Partial<BlogPost>): Promise<{ success: boolean; error?: string }> {
+    if (!this.supabase) {
+      return { success: false, error: 'Servicio no disponible' };
+    }
+
+    try {
+      const { error } = await this.supabase
+        .from('blog_posts')
+        .update(updates)
+        .eq('id', id);
+
+      if (error) {
+        console.error('Error actualizando post:', error);
+        return { success: false, error: error.message };
+      }
+
+      return { success: true };
+    } catch (error: any) {
+      console.error('Error inesperado:', error);
+      return { success: false, error: error.message || 'Error desconocido' };
+    }
+  }
+
+  /**
+   * Elimina un post
+   */
+  async deleteBlogPost(id: string): Promise<{ success: boolean; error?: string }> {
+    if (!this.supabase) {
+      return { success: false, error: 'Servicio no disponible' };
+    }
+
+    try {
+      const { error } = await this.supabase
+        .from('blog_posts')
+        .delete()
+        .eq('id', id);
+
+      if (error) {
+        console.error('Error eliminando post:', error);
+        return { success: false, error: error.message };
+      }
+
+      return { success: true };
+    } catch (error: any) {
+      console.error('Error inesperado:', error);
+      return { success: false, error: error.message || 'Error desconocido' };
+    }
+  }
+
+  /**
+   * Obtiene posts por categoría
+   */
+  async getBlogPostsByCategory(category: string): Promise<BlogPost[]> {
+    if (!this.supabase) {
+      return [];
+    }
+
+    try {
+      const { data, error } = await this.supabase
+        .from('blog_posts')
+        .select('*')
+        .eq('category', category)
+        .eq('is_published', true)
+        .order('published_date', { ascending: false });
+
+      if (error) {
+        console.error('Error obteniendo posts por categoría:', error);
+        return [];
+      }
+
+      return data || [];
+    } catch (error) {
+      console.error('Error inesperado:', error);
+      return [];
+    }
+  }
+
+  /**
+   * Obtiene posts destacados
+   */
+  async getFeaturedBlogPosts(): Promise<BlogPost[]> {
+    if (!this.supabase) {
+      return [];
+    }
+
+    try {
+      const { data, error } = await this.supabase
+        .from('blog_posts')
+        .select('*')
+        .eq('featured', true)
+        .eq('is_published', true)
+        .order('published_date', { ascending: false });
+
+      if (error) {
+        console.error('Error obteniendo posts destacados:', error);
+        return [];
+      }
+
+      return data || [];
+    } catch (error) {
+      console.error('Error inesperado:', error);
+      return [];
+    }
+  }
+
+  // ==================== STORAGE METHODS ====================
+
+  /**
+   * Sube una imagen al bucket de blog
+   */
+  async uploadBlogImage(file: File, folder: string = 'posts'): Promise<{ success: boolean; error?: string; url?: string }> {
+    if (!this.supabase) {
+      return { success: false, error: 'Servicio no disponible' };
+    }
+
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${folder}/${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+
+      const { data, error } = await this.supabase.storage
+        .from('blog-images')
+        .upload(fileName, file, {
+          cacheControl: '3600',
+          upsert: false
+        });
+
+      if (error) {
+        console.error('Error subiendo imagen:', error);
+        return { success: false, error: error.message };
+      }
+
+      // Obtener URL pública
+      const { data: { publicUrl } } = this.supabase.storage
+        .from('blog-images')
+        .getPublicUrl(data.path);
+
+      return { success: true, url: publicUrl };
+    } catch (error: any) {
+      console.error('Error inesperado:', error);
+      return { success: false, error: error.message || 'Error desconocido' };
+    }
+  }
+
+  /**
+   * Elimina una imagen del storage
+   */
+  async deleteBlogImage(imageUrl: string): Promise<{ success: boolean; error?: string }> {
+    if (!this.supabase) {
+      return { success: false, error: 'Servicio no disponible' };
+    }
+
+    try {
+      // Extraer el path de la URL
+      const path = imageUrl.split('/storage/v1/object/public/blog-images/')[1];
+      if (!path) {
+        return { success: false, error: 'URL inválida' };
+      }
+
+      const { error } = await this.supabase.storage
+        .from('blog-images')
+        .remove([path]);
+
+      if (error) {
+        console.error('Error eliminando imagen:', error);
+        return { success: false, error: error.message };
+      }
+
+      return { success: true };
+    } catch (error: any) {
+      console.error('Error inesperado:', error);
+      return { success: false, error: error.message || 'Error desconocido' };
     }
   }
 }

@@ -14,6 +14,66 @@
 
   <!-- Main Content -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Quick Actions -->
+    <div class="mb-8">
+      <h2 class="text-lg font-semibold text-gray-900 mb-4">Accesos Rápidos</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <a
+          routerLink="/admin/blog"
+          class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow border-l-4 border-pastel-green"
+        >
+          <div class="flex items-center gap-4">
+            <div class="p-3 bg-pastel-green-light rounded-lg">
+              <svg class="w-6 h-6 text-pastel-green-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-900">Gestionar Blog</h3>
+              <p class="text-sm text-gray-500">Crear y editar posts</p>
+            </div>
+          </div>
+        </a>
+
+        <a
+          routerLink="/blog"
+          target="_blank"
+          class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow border-l-4 border-blue-500"
+        >
+          <div class="flex items-center gap-4">
+            <div class="p-3 bg-blue-50 rounded-lg">
+              <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-900">Ver Blog Público</h3>
+              <p class="text-sm text-gray-500">Abrir en nueva pestaña</p>
+            </div>
+          </div>
+        </a>
+
+        <a
+          routerLink="/"
+          target="_blank"
+          class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow border-l-4 border-purple-500"
+        >
+          <div class="flex items-center gap-4">
+            <div class="p-3 bg-purple-50 rounded-lg">
+              <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-900">Ver Sitio Web</h3>
+              <p class="text-sm text-gray-500">Ir a la página principal</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
     <!-- Stats -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
       <div class="bg-white rounded-lg shadow p-6">

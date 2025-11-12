@@ -45,6 +45,11 @@ export const routes: Routes = [
     canActivate: [authGuard]
   },
   {
+    path: 'admin/blog',
+    loadComponent: () => import('./features/admin/blog-admin/blog-admin').then(m => m.BlogAdminComponent),
+    canActivate: [authGuard]
+  },
+  {
     path: 'admin',
     redirectTo: 'admin/dashboard'
   },
