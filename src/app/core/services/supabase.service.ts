@@ -1,7 +1,8 @@
 import { Injectable, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { createClient, SupabaseClient, User } from '@supabase/supabase-js';
 import { environment } from '../../../environments/environment';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface GuideDownload {
   id?: string;
@@ -16,6 +17,8 @@ export interface GuideDownload {
 export class SupabaseService {
   private supabase: SupabaseClient | null = null;
   private platformId = inject(PLATFORM_ID);
+  private currentUserSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
+  public currentUser$: Observable<User | null> = this.currentUserSubject.asObservable();
 
   constructor() {
     // Solo inicializar Supabase en el navegador, no en el servidor
@@ -25,13 +28,72 @@ export class SupabaseService {
         environment.supabase.anonKey,
         {
           auth: {
-            persistSession: false, // No persistir sesión (no necesitamos auth)
-            autoRefreshToken: false, // No auto-refrescar tokens
-            detectSessionInUrl: false // No detectar sesión en URL
+            persistSession: true, // Persistir sesión para admin
+            autoRefreshToken: true, // Auto-refrescar tokens
+            detectSessionInUrl: true // Detectar sesión en URL
           }
         }
       );
+
+      // Escuchar cambios en la autenticación
+      this.supabase.auth.onAuthStateChange((event, session) => {
+        this.currentUserSubject.next(session?.user ?? null);
+      });
+
+      // Obtener sesión actual al iniciar
+      this.supabase.auth.getSession().then(({ data: { session } }) => {
+        this.currentUserSubject.next(session?.user ?? null);
+      });
     }
+  }
+
+  // ==================== AUTH METHODS ====================
+
+  /**
+   * Inicia sesión con email y contraseña
+   */
+  async signIn(email: string, password: string): Promise<{ success: boolean; error?: string }> {
+    if (!this.supabase) {
+      return { success: false, error: 'Servicio no disponible' };
+    }
+
+    try {
+      const { data, error } = await this.supabase.auth.signInWithPassword({
+        email,
+        password
+      });
+
+      if (error) {
+        return { success: false, error: error.message };
+      }
+
+      return { success: true };
+    } catch (error: any) {
+      return { success: false, error: error.message || 'Error desconocido' };
+    }
+  }
+
+  /**
+   * Cierra la sesión actual
+   */
+  async signOut(): Promise<void> {
+    if (!this.supabase) return;
+    await this.supabase.auth.signOut();
+    this.currentUserSubject.next(null);
+  }
+
+  /**
+   * Obtiene el usuario actual
+   */
+  getCurrentUser(): User | null {
+    return this.currentUserSubject.value;
+  }
+
+  /**
+   * Verifica si hay un usuario autenticado
+   */
+  isAuthenticated(): boolean {
+    return this.currentUserSubject.value !== null;
   }
 
   /**
@@ -119,6 +181,88 @@ export class SupabaseService {
     } catch (error) {
       console.error('Error inesperado:', error);
       return false;
+    }
+  }
+
+  // ==================== ADMIN METHODS ====================
+
+  /**
+   * Actualiza un registro de guide_downloads
+   */
+  async updateGuideDownload(id: string, updates: Partial<GuideDownload>): Promise<{ success: boolean; error?: string }> {
+    if (!this.supabase) {
+      return { success: false, error: 'Servicio no disponible' };
+    }
+
+    try {
+      const { error } = await this.supabase
+        .from('guide_downloads')
+        .update(updates)
+        .eq('id', id);
+
+      if (error) {
+        return { success: false, error: error.message };
+      }
+
+      return { success: true };
+    } catch (error: any) {
+      return { success: false, error: error.message || 'Error desconocido' };
+    }
+  }
+
+  /**
+   * Elimina un registro de guide_downloads
+   */
+  async deleteGuideDownload(id: string): Promise<{ success: boolean; error?: string }> {
+    if (!this.supabase) {
+      return { success: false, error: 'Servicio no disponible' };
+    }
+
+    try {
+      const { error } = await this.supabase
+        .from('guide_downloads')
+        .delete()
+        .eq('id', id);
+
+      if (error) {
+        return { success: false, error: error.message };
+      }
+
+      return { success: true };
+    } catch (error: any) {
+      return { success: false, error: error.message || 'Error desconocido' };
+    }
+  }
+
+  /**
+   * Obtiene estadísticas de descargas
+   */
+  async getDownloadStats(): Promise<{ total: number; bySource: Record<string, number> }> {
+    if (!this.supabase) {
+      return { total: 0, bySource: {} };
+    }
+
+    try {
+      const { data, error } = await this.supabase
+        .from('guide_downloads')
+        .select('source_page');
+
+      if (error || !data) {
+        return { total: 0, bySource: {} };
+      }
+
+      const bySource: Record<string, number> = {};
+      data.forEach((record: any) => {
+        const source = record.source_page || 'desconocido';
+        bySource[source] = (bySource[source] || 0) + 1;
+      });
+
+      return {
+        total: data.length,
+        bySource
+      };
+    } catch (error) {
+      return { total: 0, bySource: {} };
     }
   }
 }
