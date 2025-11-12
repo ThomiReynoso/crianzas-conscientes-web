@@ -54,7 +54,9 @@ export const routes: Routes = [
   },
   {
     path: 'blog/:slug',
-    loadComponent: () => import('./features/blog-post/blog-post').then(m => m.BlogPostComponent)
+    loadComponent: () => import('./features/blog-post/blog-post').then(m => m.BlogPostComponent),
+    // Desactivar prerendering para rutas dinámicas del blog
+    // Se renderizará en el servidor cuando el usuario acceda
   },
   {
     path: '**',
