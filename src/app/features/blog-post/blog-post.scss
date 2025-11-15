@@ -1,0 +1,275 @@
+// Post Content Styling
+.post-content {
+  color: #404040;
+  line-height: 1.8;
+
+  // Headings
+  :deep(h1), :deep(h2), :deep(h3), :deep(h4), :deep(h5), :deep(h6) {
+    font-family: 'Gloria Hallelujah', cursive;
+    font-weight: 700;
+    color: #262626;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  :deep(h1) {
+    font-size: 2.5rem;
+    margin-top: 3rem;
+  }
+
+  :deep(h2) {
+    font-size: 2rem;
+    margin-top: 2.5rem;
+  }
+
+  :deep(h3) {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  :deep(h4) {
+    font-size: 1.25rem;
+  }
+
+  // Paragraphs
+  :deep(p) {
+    margin-bottom: 1.5rem;
+    font-size: 1.125rem;
+  }
+
+  // Lists
+  :deep(ul), :deep(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 2rem;
+  }
+
+  :deep(ul) {
+    list-style-type: disc;
+  }
+
+  :deep(ol) {
+    list-style-type: decimal;
+  }
+
+  :deep(li) {
+    margin-bottom: 0.75rem;
+    font-size: 1.125rem;
+  }
+
+  // Nested lists
+  :deep(ul ul), :deep(ol ol), :deep(ul ol), :deep(ol ul) {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  // Strong and emphasis
+  :deep(strong) {
+    font-weight: 700;
+    color: #262626;
+  }
+
+  :deep(em) {
+    font-style: italic;
+  }
+
+  // Blockquotes
+  :deep(blockquote) {
+    border-left: 4px solid #539f4a;
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: #525252;
+    background-color: #F5F5DC;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+  }
+
+  // Links
+  :deep(a) {
+    color: #439639;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #539f4a;
+    }
+  }
+
+  // Tables
+  :deep(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    font-size: 1rem;
+  }
+
+  :deep(th) {
+    background-color: #a8c66c;
+    color: #262626;
+    font-weight: 700;
+    padding: 0.75rem;
+    text-align: left;
+    border: 1px solid #F0E68C;
+  }
+
+  :deep(td) {
+    padding: 0.75rem;
+    border: 1px solid #F0E68C;
+  }
+
+  :deep(tr:nth-child(even)) {
+    background-color: #F5F5DC;
+  }
+
+  // Code
+  :deep(code) {
+    background-color: #F5F5DC;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+    font-family: monospace;
+    color: #262626;
+  }
+
+  :deep(pre) {
+    background-color: #262626;
+    color: #FFFEF7;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin: 2rem 0;
+
+    code {
+      background-color: transparent;
+      padding: 0;
+      color: inherit;
+    }
+  }
+
+  // Horizontal rule
+  :deep(hr) {
+    border: none;
+    border-top: 2px solid #F0E68C;
+    margin: 3rem 0;
+  }
+
+  // Images
+  :deep(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin: 2rem 0;
+  }
+}
+
+// Tags (Large version for post detail)
+.tag-large {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #F5F5DC;
+  border-radius: 1.5rem;
+  font-size: 0.875rem;
+  color: #404040;
+  font-weight: 500;
+  border: 1px solid #F0E68C;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: #a8c66c;
+    border-color: #539f4a;
+  }
+}
+
+// Share Buttons
+.share-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: #F5F5DC;
+  color: #404040;
+  border: 1px solid #F0E68C;
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #539f4a;
+    color: white;
+    border-color: #439639;
+    transform: translateY(-2px);
+  }
+}
+
+// Related Posts Cards (Smaller version)
+.blog-card-small {
+  background-color: white;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+}
+
+.blog-card-small-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background-color: #F5F5DC;
+
+  img {
+    transition: transform 0.3s ease;
+  }
+
+  .blog-card-small:hover & img {
+    transform: scale(1.05);
+  }
+}
+
+// Line clamp utilities
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .post-content {
+    :deep(h1) {
+      font-size: 2rem;
+    }
+
+    :deep(h2) {
+      font-size: 1.75rem;
+    }
+
+    :deep(h3) {
+      font-size: 1.5rem;
+    }
+
+    :deep(p), :deep(li) {
+      font-size: 1rem;
+    }
+  }
+}

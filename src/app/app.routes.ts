@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -32,6 +33,35 @@ export const routes: Routes = [
   {
     path: 'politica-privacidad',
     loadComponent: () => import('./features/privacy-policy/privacy-policy').then(m => m.PrivacyPolicyComponent)
+  },
+  // Admin Routes
+  {
+    path: 'admin/login',
+    loadComponent: () => import('./features/admin/login/login').then(m => m.AdminLoginComponent)
+  },
+  {
+    path: 'admin/dashboard',
+    loadComponent: () => import('./features/admin/dashboard/dashboard').then(m => m.AdminDashboardComponent),
+    canActivate: [authGuard]
+  },
+  {
+    path: 'admin/blog',
+    loadComponent: () => import('./features/admin/blog-admin/blog-admin').then(m => m.BlogAdminComponent),
+    canActivate: [authGuard]
+  },
+  {
+    path: 'admin',
+    redirectTo: 'admin/dashboard'
+  },
+  {
+    path: 'blog',
+    loadComponent: () => import('./features/blog/blog').then(m => m.Blog)
+  },
+  {
+    path: 'blog/:slug',
+    loadComponent: () => import('./features/blog-post/blog-post').then(m => m.BlogPostComponent),
+    // Desactivar prerendering para rutas dinámicas del blog
+    // Se renderizará en el servidor cuando el usuario acceda
   },
   {
     path: '**',

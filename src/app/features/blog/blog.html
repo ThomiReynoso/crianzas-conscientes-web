@@ -1,0 +1,125 @@
+<!-- Blog Header -->
+<section class="relative overflow-hidden bg-gradient-to-br from-pastel-beige-light via-pastel-cream to-pastel-sage-light py-16 md:py-24">
+  <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20" style="background-image: url('/Fondo.jpeg');"></div>
+  <div class="container relative z-10">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-neutral-800 mb-6">
+        Blog de Crianza Consciente
+      </h1>
+      <p class="text-xl md:text-2xl text-neutral-600 max-w-3xl mx-auto">
+        Artículos, reflexiones y herramientas prácticas para acompañarte en tu camino de crianza consciente
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Category Filter -->
+<section class="bg-white py-8 border-b border-pastel-beige-light sticky top-0 z-20">
+  <div class="container">
+    <div class="flex flex-wrap gap-3 justify-center">
+      <button
+        (click)="filterByCategory('all')"
+        [class.active]="selectedCategory() === 'all'"
+        class="category-filter"
+      >
+        Todos
+      </button>
+      @for (category of categories(); track category) {
+        <button
+          (click)="filterByCategory(category)"
+          [class.active]="selectedCategory() === category"
+          class="category-filter"
+        >
+          {{ category }}
+        </button>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Blog Posts Grid -->
+<section class="section bg-pastel-beige-light">
+  <div class="container">
+    <div class="max-w-6xl mx-auto">
+      @if (filteredPosts().length === 0) {
+        <div class="text-center py-16">
+          <p class="text-xl text-neutral-600">No hay posts disponibles en esta categoría.</p>
+        </div>
+      } @else {
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          @for (post of filteredPosts(); track post.id) {
+            <article class="blog-card group">
+              <a [routerLink]="['/blog', post.slug]" (click)="onPostClick(post)">
+                <!-- Image -->
+                <div class="blog-card-image">
+                  <img [src]="post.imageUrl" [alt]="post.title" class="w-full h-full object-cover" />
+                  <!-- Category Badge -->
+                  <div class="category-badge">
+                    {{ post.category }}
+                  </div>
+                </div>
+
+                <!-- Content -->
+                <div class="p-6">
+                  <!-- Meta -->
+                  <div class="flex items-center gap-4 text-sm text-neutral-500 mb-3">
+                    <span>{{ formatDate(post.publishedDate) }}</span>
+                    <span>•</span>
+                    <span>{{ post.readingTime }} min de lectura</span>
+                  </div>
+
+                  <!-- Title -->
+                  <h2 class="text-xl font-display font-semibold text-neutral-800 mb-3 group-hover:text-pastel-green-dark transition-colors line-clamp-2">
+                    {{ post.title }}
+                  </h2>
+
+                  <!-- Excerpt -->
+                  <p class="text-neutral-600 leading-relaxed line-clamp-3 mb-4">
+                    {{ post.excerpt }}
+                  </p>
+
+                  <!-- Tags -->
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    @for (tag of post.tags.slice(0, 3); track tag) {
+                      <span class="tag">{{ tag }}</span>
+                    }
+                  </div>
+
+                  <!-- Read More -->
+                  <div class="flex items-center text-pastel-green-dark font-medium group-hover:gap-3 transition-all">
+                    <span>Leer más</span>
+                    <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                  </div>
+                </div>
+              </a>
+            </article>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="section bg-gradient-to-br from-pastel-cream to-pastel-beige">
+  <div class="container">
+    <div class="text-center max-w-3xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-display font-bold text-neutral-800 mb-6">
+        ¿Te gustaría profundizar más?
+      </h2>
+      <p class="text-xl text-neutral-700 mb-8">
+        Descarga mi guía gratuita o agenda una sesión de acompañamiento personalizado
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a routerLink="/descarga-guia" class="btn-primary text-lg px-8 py-4">
+          Descargar guía gratuita
+        </a>
+        <a routerLink="/contacto" class="btn-secondary text-lg px-8 py-4">
+          Agendar sesión
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,460 @@
+<div class="min-h-screen bg-pastel-beige-light">
+  <!-- Header -->
+  <header class="bg-white shadow-sm border-b border-pastel-beige">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div class="flex justify-between items-center">
+        <div>
+          <h1 class="text-2xl font-display font-bold text-neutral-800">Administrar Blog</h1>
+          <p class="text-neutral-600 text-sm">Gestiona los posts del blog</p>
+        </div>
+        <div class="flex gap-4">
+          <a routerLink="/admin/dashboard" class="btn-secondary px-4 py-2">
+            ← Volver al Dashboard
+          </a>
+          <button (click)="logout()" class="btn-secondary px-4 py-2">
+            Cerrar Sesión
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Error Message -->
+  @if (error()) {
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+      <div class="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg flex justify-between items-center">
+        <span>{{ error() }}</span>
+        <button (click)="error.set('')" class="text-red-600 hover:text-red-800">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  }
+
+  <!-- Main Content -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    @if (!showForm()) {
+      <!-- List View -->
+      <div class="space-y-6">
+        <!-- Actions Bar -->
+        <div class="bg-white rounded-lg shadow-sm border border-pastel-beige p-6">
+          <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+            <div class="flex flex-col md:flex-row gap-4 flex-1 w-full">
+              <!-- Search -->
+              <div class="flex-1">
+                <input
+                  type="text"
+                  [(ngModel)]="searchTerm"
+                  (ngModelChange)="applyFilters()"
+                  placeholder="Buscar por título, extracto o tags..."
+                  class="w-full px-4 py-2 border border-pastel-beige rounded-lg focus:outline-none focus:ring-2 focus:ring-pastel-green"
+                />
+              </div>
+
+              <!-- Category Filter -->
+              <div>
+                <select
+                  [(ngModel)]="filterCategory"
+                  (ngModelChange)="applyFilters()"
+                  class="px-4 py-2 border border-pastel-beige rounded-lg focus:outline-none focus:ring-2 focus:ring-pastel-green"
+                >
+                  <option value="all">Todas las categorías</option>
+                  @for (category of categories; track category) {
+                    <option [value]="category">{{ category }}</option>
+                  }
+                </select>
+              </div>
+            </div>
+
+            <!-- Create Button -->
+            <button
+              (click)="openCreateForm()"
+              class="btn-primary px-6 py-2 whitespace-nowrap"
+            >
+              + Crear Nuevo Post
+            </button>
+          </div>
+        </div>
+
+        <!-- Posts List -->
+        @if (isLoading()) {
+          <div class="text-center py-12">
+            <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-pastel-green border-t-transparent"></div>
+            <p class="mt-4 text-neutral-600">Cargando posts...</p>
+          </div>
+        } @else if (filteredPosts().length === 0) {
+          <div class="bg-white rounded-lg shadow-sm border border-pastel-beige p-12 text-center">
+            <svg class="mx-auto h-12 w-12 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <h3 class="mt-2 text-lg font-medium text-neutral-800">No hay posts</h3>
+            <p class="mt-1 text-neutral-600">Comienza creando tu primer post del blog.</p>
+            <button (click)="openCreateForm()" class="mt-4 btn-primary px-6 py-2">
+              Crear Primer Post
+            </button>
+          </div>
+        } @else {
+          <div class="grid gap-6">
+            @for (post of filteredPosts(); track post.id) {
+              <div class="bg-white rounded-lg shadow-sm border border-pastel-beige p-6 hover:shadow-md transition-shadow">
+                <div class="flex gap-6">
+                  <!-- Image -->
+                  @if (post.image_url) {
+                    <div class="flex-shrink-0">
+                      <img
+                        [src]="post.image_url"
+                        [alt]="post.title"
+                        class="w-32 h-32 object-cover rounded-lg"
+                      />
+                    </div>
+                  }
+
+                  <!-- Content -->
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-start justify-between gap-4">
+                      <div class="flex-1">
+                        <div class="flex items-center gap-2 mb-2">
+                          <h3 class="text-xl font-display font-semibold text-neutral-800 truncate">
+                            {{ post.title }}
+                          </h3>
+                          @if (!post.is_published) {
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">
+                              Borrador
+                            </span>
+                          }
+                          @if (post.featured) {
+                            <span class="px-2 py-1 bg-pastel-green-light text-pastel-green-dark text-xs font-medium rounded-full">
+                              Destacado
+                            </span>
+                          }
+                        </div>
+
+                        <p class="text-neutral-600 text-sm mb-3 line-clamp-2">
+                          {{ post.excerpt }}
+                        </p>
+
+                        <div class="flex flex-wrap gap-3 text-sm text-neutral-500">
+                          <span class="flex items-center gap-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                            </svg>
+                            {{ post.category }}
+                          </span>
+                          <span class="flex items-center gap-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            {{ formatDate(post.published_date) }}
+                          </span>
+                          <span class="flex items-center gap-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            {{ post.reading_time }} min
+                          </span>
+                        </div>
+
+                        @if (post.tags && post.tags.length > 0) {
+                          <div class="flex flex-wrap gap-2 mt-3">
+                            @for (tag of post.tags.slice(0, 5); track tag) {
+                              <span class="px-2 py-1 bg-pastel-beige-light text-neutral-600 text-xs rounded-full">
+                                {{ tag }}
+                              </span>
+                            }
+                          </div>
+                        }
+                      </div>
+
+                      <!-- Actions -->
+                      <div class="flex flex-col gap-2">
+                        <button
+                          (click)="viewPost(post.slug)"
+                          class="p-2 text-pastel-green-dark hover:bg-pastel-green-light rounded-lg transition-colors"
+                          title="Ver post"
+                        >
+                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                          </svg>
+                        </button>
+                        <button
+                          (click)="openEditForm(post)"
+                          class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                          title="Editar"
+                        >
+                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                          </svg>
+                        </button>
+                        <button
+                          (click)="deletePost(post)"
+                          class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                          title="Eliminar"
+                        >
+                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    } @else {
+      <!-- Form View -->
+      <div class="bg-white rounded-lg shadow-sm border border-pastel-beige p-8">
+        <div class="mb-6">
+          <h2 class="text-2xl font-display font-bold text-neutral-800">
+            {{ editingPost() ? 'Editar Post' : 'Crear Nuevo Post' }}
+          </h2>
+        </div>
+
+        <form (ngSubmit)="savePost()" class="space-y-6">
+          <!-- Title -->
+          <div>
+            <label class="block text-sm font-medium text-neutral-700 mb-2">
+              Título *
+            </label>
+            <input
+              type="text"
+              [(ngModel)]="formData().title!"
+              name="title"
+              (blur)="generateSlug()"
+              required
+              class="w-full px-4 py-2 border border-pastel-beige rounded-lg focus:outline-none focus:ring-2 focus:ring-pastel-green"
+              placeholder="Título del post"
+            />
+          </div>
+
+          <!-- Slug -->
+          <div>
+            <label class="block text-sm font-medium text-neutral-700 mb-2">
+              Slug (URL) *
+            </label>
+            <input
+              type="text"
+              [(ngModel)]="formData().slug!"
+              name="slug"
+              required
+              pattern="^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              class="w-full px-4 py-2 border border-pastel-beige rounded-lg focus:outline-none focus:ring-2 focus:ring-pastel-green"
+              placeholder="titulo-del-post"
+            />
+            <p class="text-xs text-neutral-500 mt-1">Solo letras minúsculas, números y guiones</p>
+          </div>
+
+          <!-- Excerpt -->
+          <div>
+            <label class="block text-sm font-medium text-neutral-700 mb-2">
+              Extracto *
+            </label>
+            <textarea
+              [(ngModel)]="formData().excerpt!"
+              name="excerpt"
+              required
+              rows="3"
+              class="w-full px-4 py-2 border border-pastel-beige rounded-lg focus:outline-none focus:ring-2 focus:ring-pastel-green"
+              placeholder="Breve descripción del post"
+            ></textarea>
+          </div>
+
+          <!-- Content -->
+          <div>
+            <label class="block text-sm font-medium text-neutral-700 mb-2">
+              Contenido (Markdown) *
+            </label>
+            <textarea
+              [(ngModel)]="formData().content!"
+              name="content"
+              required
+              rows="15"
+              class="w-full px-4 py-2 border border-pastel-beige rounded-lg focus:outline-none focus:ring-2 focus:ring-pastel-green font-mono text-sm"
+              placeholder="# Título del artículo&#10;&#10;Contenido en Markdown..."
+            ></textarea>
+            <p class="text-xs text-neutral-500 mt-1">Usa Markdown para formatear el contenido</p>
+          </div>
+
+          <!-- Row: Category, Reading Time, Date -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Category -->
+            <div>
+              <label class="block text-sm font-medium text-neutral-700 mb-2">
+                Categoría *
+              </label>
+              <select
+                [(ngModel)]="formData().category!"
+                name="category"
+                required
+                class="w-full px-4 py-2 border border-pastel-beige rounded-lg focus:outline-none focus:ring-2 focus:ring-pastel-green"
+              >
+                @for (category of categories; track category) {
+                  <option [value]="category">{{ category }}</option>
+                }
+              </select>
+            </div>
+
+            <!-- Reading Time -->
+            <div>
+              <label class="block text-sm font-medium text-neutral-700 mb-2">
+                Tiempo de lectura (min) *
+              </label>
+              <input
+                type="number"
+                [(ngModel)]="formData().reading_time!"
+                name="reading_time"
+                required
+                min="1"
+                max="60"
+                class="w-full px-4 py-2 border border-pastel-beige rounded-lg focus:outline-none focus:ring-2 focus:ring-pastel-green"
+              />
+            </div>
+
+            <!-- Published Date -->
+            <div>
+              <label class="block text-sm font-medium text-neutral-700 mb-2">
+                Fecha de publicación *
+              </label>
+              <input
+                type="date"
+                [(ngModel)]="formData().published_date!"
+                name="published_date"
+                required
+                class="w-full px-4 py-2 border border-pastel-beige rounded-lg focus:outline-none focus:ring-2 focus:ring-pastel-green"
+              />
+            </div>
+          </div>
+
+          <!-- Author -->
+          <div>
+            <label class="block text-sm font-medium text-neutral-700 mb-2">
+              Autor *
+            </label>
+            <input
+              type="text"
+              [(ngModel)]="formData().author!"
+              name="author"
+              required
+              class="w-full px-4 py-2 border border-pastel-beige rounded-lg focus:outline-none focus:ring-2 focus:ring-pastel-green"
+            />
+          </div>
+
+          <!-- Image -->
+          <div>
+            <label class="block text-sm font-medium text-neutral-700 mb-2">
+              Imagen destacada
+            </label>
+            <div class="flex gap-4 items-start">
+              <input
+                type="file"
+                accept="image/*"
+                (change)="onImageUpload($event)"
+                [disabled]="uploadingImage()"
+                class="flex-1 px-4 py-2 border border-pastel-beige rounded-lg focus:outline-none focus:ring-2 focus:ring-pastel-green"
+              />
+              @if (uploadingImage()) {
+                <div class="flex items-center gap-2 text-pastel-green-dark">
+                  <div class="animate-spin rounded-full h-5 w-5 border-2 border-pastel-green border-t-transparent"></div>
+                  <span class="text-sm">Subiendo...</span>
+                </div>
+              }
+            </div>
+            @if (formData().image_url) {
+              <div class="mt-2">
+                <img [src]="formData().image_url" alt="Preview" class="w-48 h-32 object-cover rounded-lg" />
+                <p class="text-xs text-neutral-500 mt-1 truncate">{{ formData().image_url }}</p>
+              </div>
+            }
+          </div>
+
+          <!-- Tags -->
+          <div>
+            <label class="block text-sm font-medium text-neutral-700 mb-2">
+              Tags
+            </label>
+            <div class="flex gap-2 mb-2">
+              <input
+                type="text"
+                [(ngModel)]="tagInput"
+                name="tagInput"
+                (keyup.enter)="addTag()"
+                placeholder="Agregar tag..."
+                class="flex-1 px-4 py-2 border border-pastel-beige rounded-lg focus:outline-none focus:ring-2 focus:ring-pastel-green"
+              />
+              <button
+                type="button"
+                (click)="addTag()"
+                class="btn-secondary px-4 py-2"
+              >
+                Agregar
+              </button>
+            </div>
+            @if (formData().tags && formData().tags!.length > 0) {
+              <div class="flex flex-wrap gap-2">
+                @for (tag of formData().tags; track tag) {
+                  <span class="px-3 py-1 bg-pastel-beige-light text-neutral-700 rounded-full text-sm flex items-center gap-2">
+                    {{ tag }}
+                    <button
+                      type="button"
+                      (click)="removeTag(tag)"
+                      class="text-neutral-500 hover:text-neutral-700"
+                    >
+                      ×
+                    </button>
+                  </span>
+                }
+              </div>
+            }
+          </div>
+
+          <!-- Checkboxes -->
+          <div class="flex gap-6">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                [(ngModel)]="formData().featured!"
+                name="featured"
+                class="w-4 h-4 text-pastel-green border-pastel-beige rounded focus:ring-2 focus:ring-pastel-green"
+              />
+              <span class="text-sm text-neutral-700">Post destacado</span>
+            </label>
+
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                [(ngModel)]="formData().is_published!"
+                name="is_published"
+                class="w-4 h-4 text-pastel-green border-pastel-beige rounded focus:ring-2 focus:ring-pastel-green"
+              />
+              <span class="text-sm text-neutral-700">Publicar ahora</span>
+            </label>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex gap-4 pt-6 border-t border-pastel-beige">
+            <button
+              type="submit"
+              [disabled]="isLoading()"
+              class="btn-primary px-6 py-2"
+            >
+              {{ isLoading() ? 'Guardando...' : (editingPost() ? 'Actualizar Post' : 'Crear Post') }}
+            </button>
+            <button
+              type="button"
+              (click)="closeForm()"
+              [disabled]="isLoading()"
+              class="btn-secondary px-6 py-2"
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </div>
+    }
+  </div>
+</div>
